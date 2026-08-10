@@ -6,14 +6,18 @@
 }
 
 * { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; min-height: 100vh; }
+body { margin: 0; min-width: 0; min-height: 100vh; }
 button, input, textarea, select { font: inherit; }
 button { border: 0; border-radius: .55rem; padding: .72rem 1rem; color: white; background: #2457d6; cursor: pointer; font-weight: 700; }
 button:hover { background: #1744b4; }
-button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid #f3a712; outline-offset: 2px; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #172554;
+}
 button:disabled { opacity: .65; cursor: wait; }
 label { display: grid; gap: .42rem; font-weight: 700; }
-input, textarea, select { width: 100%; border: 1px solid #aeb8c8; border-radius: .5rem; padding: .72rem; color: #172033; background: white; }
+input, textarea, select { width: 100%; border: 1px solid #718096; border-radius: .5rem; padding: .72rem; color: #172033; background: white; }
 textarea { min-height: 7rem; resize: vertical; }
 form { display: grid; gap: 1rem; }
 h1, h2, p { margin-top: 0; }
@@ -54,6 +58,7 @@ h1, h2, p { margin-top: 0; }
 .seeded-focus-defect button:focus-visible, .seeded-focus-defect input:focus-visible, .seeded-focus-defect textarea:focus-visible, .seeded-focus-defect select:focus-visible { outline: none; }
 
 @media (max-width: 760px) {
+  .app-shell > header { align-items: stretch; flex-direction: column; }
   .workspace { grid-template-columns: 1fr; }
   .toolbar { grid-template-columns: 1fr; }
   .task { align-items: stretch; flex-direction: column; }

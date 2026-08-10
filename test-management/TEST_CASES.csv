@@ -1,101 +1,101 @@
 "Test Case ID","Title","Objective","Type","Priority","Requirement IDs","Acceptance Criteria IDs","Preconditions","Test Data","Steps","Expected Result","Labels","Automation Candidate","Case Status","Version"
 "TC-AUTH-001","Register with valid synthetic account","Confirm a visitor can create a member account.","Smoke","Critical","FR-AUTH-001; NFR-DATA-001","AC-US001-01","Visitor is signed out; email is not registered.","new.member@example.test; SyntheticPass123","1. Open registration.
 2. Enter a synthetic display name, unique email, and valid password.
-3. Submit.","One member account is created, the workspace opens, and the header shows the new member.","auth; smoke; positive","Yes","Draft","v1.0"
+3. Submit.","One member account is created, the workspace opens, and the header shows the new member.","auth; smoke; positive","Yes","Approved","v1.0"
 "TC-AUTH-002","Reject duplicate email registration","Confirm normalized email uniqueness is enforced.","Negative","High","FR-AUTH-001","AC-US001-02","A synthetic member account already exists.","Existing email with changed letter case","1. Sign out.
 2. Open registration.
-3. Submit the existing email with different letter case and otherwise valid data.","Registration is rejected with a conflict message and no second account is created.","auth; negative; regression","Yes","Draft","v1.0"
+3. Submit the existing email with different letter case and otherwise valid data.","Registration is rejected with a conflict message and no second account is created.","auth; negative; regression","Yes","Approved","v1.0"
 "TC-AUTH-003","Sign in with valid credentials","Confirm a registered user can start an authenticated session.","Smoke","Critical","FR-AUTH-002","AC-US001-03","Synthetic member account exists; user is signed out.","Valid member email and password","1. Open sign-in.
 2. Enter valid credentials.
-3. Submit.","The workspace opens and identifies the correct display name and role.","auth; smoke; positive","Yes","Draft","v1.0"
+3. Submit.","The workspace opens and identifies the correct display name and role.","auth; smoke; positive","Yes","Approved","v1.0"
 "TC-AUTH-004","Reject incorrect password","Confirm incorrect credentials do not create a session.","Negative","Critical","FR-AUTH-002","AC-US001-04","Synthetic member account exists; user is signed out.","Valid email; incorrect synthetic password","1. Enter the registered email and an incorrect password.
-2. Submit.","Access is denied with a clear credential error and the sign-in page remains displayed.","auth; negative; security","Yes","Draft","v1.0"
+2. Submit.","Access is denied with a clear credential error and the sign-in page remains displayed.","auth; negative; security","Yes","Approved","v1.0"
 "TC-AUTH-005","Reject unknown email","Confirm an unknown identity receives the same credential error.","Negative","High","FR-AUTH-002","AC-US001-04","User is signed out.","unknown.user@example.test; valid-format password","1. Enter an unregistered email and valid-format password.
-2. Submit.","Access is denied without revealing whether the email exists.","auth; negative; security","Yes","Draft","v1.0"
+2. Submit.","Access is denied without revealing whether the email exists.","auth; negative; security","Yes","Approved","v1.0"
 "TC-AUTH-006","Sign out from workspace","Confirm sign-out removes the current browser session.","Smoke","Critical","FR-AUTH-003","AC-US002-01","Member is signed in.","Authenticated member","1. Select Sign out.
-2. Attempt to return to the workspace by refreshing the page.","The sign-in page appears and the workspace does not reopen without credentials.","auth; smoke; session","Yes","Draft","v1.0"
+2. Attempt to return to the workspace by refreshing the page.","The sign-in page appears and the workspace does not reopen without credentials.","auth; smoke; session","Yes","Approved","v1.0"
 "TC-AUTH-007","Recover from invalidated session","Confirm stale local session data does not leave a misleading signed-in state.","Recovery","High","FR-AUTH-003; NFR-REL-001","AC-US002-03; AC-US009-02","Member is signed in; local-only backend can be restarted safely.","Authenticated local session","1. Restart the backend so the local signing key changes.
-2. Refresh the workspace.","The stale session is cleared and sign-in is shown with an understandable recovery message.","auth; recovery; regression","Partial","Draft","v1.0"
+2. Refresh the workspace.","The stale session is cleared and sign-in is shown with an understandable recovery message.","auth; recovery; regression","Partial","Approved","v1.0"
 "TC-PROFILE-001","Update profile name and verify persistence","Confirm a valid display-name change persists across sessions.","Functional","High","FR-PROFILE-001","AC-US005-01; AC-US005-02; AC-US005-03","Member is signed in.","Updated Member","1. Change the profile display name.
 2. Save.
 3. Confirm the header changes.
-4. Sign out and sign back in.","A success message appears and the updated name remains after the new login.","profile; positive; regression","Yes","Draft","v1.0"
+4. Sign out and sign back in.","A success message appears and the updated name remains after the new login.","profile; positive; regression","Yes","Approved","v1.0"
 "TC-PROFILE-002","Reject blank profile name","Confirm blank display names cannot replace a stored name.","Negative","Medium","FR-PROFILE-001","AC-US005-04","Member is signed in and has a known display name.","Whitespace-only name","1. Replace the profile name with spaces.
-2. Attempt to save.","Validation rejects the value and the prior name remains stored.","profile; negative; validation","Yes","Draft","v1.0"
+2. Attempt to save.","Validation rejects the value and the prior name remains stored.","profile; negative; validation","Yes","Approved","v1.0"
 "TC-TASK-001","Create task with valid values","Confirm a member can create and view an owned task.","Smoke","Critical","FR-TASK-001; FR-TASK-002","AC-US003-01","Member is signed in; target title is unique.","Title: Review sprint checklist; Description: Synthetic task","1. Enter a valid title and description.
-2. Select Add task.","One new active task appears with the submitted values and a creation message.","task; smoke; create","Yes","Draft","v1.0"
+2. Select Add task.","One new active task appears with the submitted values and a creation message.","task; smoke; create","Yes","Approved","v1.0"
 "TC-TASK-002","Reject blank task title","Confirm a task cannot be created with a blank or whitespace title.","Negative","High","FR-TASK-001","AC-US003-02","Member is signed in.","Whitespace-only title","1. Enter spaces as the title.
 2. Enter an optional description.
-3. Attempt to submit.","Validation prevents creation and no blank task appears.","task; negative; validation","Yes","Draft","v1.0"
+3. Attempt to submit.","Validation prevents creation and no blank task appears.","task; negative; validation","Yes","Approved","v1.0"
 "TC-TASK-003","Accept task field boundaries","Confirm maximum allowed title and description lengths are accepted.","Boundary","Medium","FR-TASK-001","AC-US003-03","Member is signed in.","120-character title; 1,000-character description","1. Enter values exactly at both maximum lengths.
-2. Submit.","The task is created and stored without truncation.","task; boundary; validation","Yes","Draft","v1.0"
+2. Submit.","The task is created and stored without truncation.","task; boundary; validation","Yes","Approved","v1.0"
 "TC-TASK-004","Reject task values over boundaries","Confirm values above allowed lengths are rejected.","Boundary","High","FR-TASK-001","AC-US003-03","Member is signed in.","121-character title or 1,001-character description","1. Attempt creation with a title one character over the limit.
-2. Repeat with a description one character over the limit.","Each invalid submission is rejected and no overlength value is stored.","task; boundary; negative","Yes","Draft","v1.0"
+2. Repeat with a description one character over the limit.","Each invalid submission is rejected and no overlength value is stored.","task; boundary; negative","Yes","Approved","v1.0"
 "TC-TASK-005","Edit owned task","Confirm valid title and description edits persist.","Functional","High","FR-TASK-003","AC-US003-04","Member owns an existing task.","Updated title and description","1. Select Edit on the owned task.
 2. Change both fields.
 3. Confirm the edit.
-4. Refresh the page.","The updated values appear immediately and remain after refresh.","task; update; regression","Yes","Draft","v1.0"
+4. Refresh the page.","The updated values appear immediately and remain after refresh.","task; update; regression","Yes","Approved","v1.0"
 "TC-TASK-006","Complete active task","Confirm an active task can be completed.","Smoke","Critical","FR-TASK-004","AC-US003-05","Member owns an active task.","Active task","1. Select Complete.
-2. View the Completed filter.","The task is visibly completed, a success message appears, and the task is included under Completed.","task; state; smoke","Yes","Draft","v1.0"
+2. View the Completed filter.","The task is visibly completed, a success message appears, and the task is included under Completed.","task; state; smoke","Yes","Approved","v1.0"
 "TC-TASK-007","Reopen completed task","Confirm a completed task can return to active state.","Functional","High","FR-TASK-004","AC-US003-06","Member owns a completed task.","Completed task","1. Select Reopen.
-2. View the Active filter.","The task is active, a success message appears, and the task is included under Active.","task; state; regression","Yes","Draft","v1.0"
+2. View the Active filter.","The task is active, a success message appears, and the task is included under Active.","task; state; regression","Yes","Approved","v1.0"
 "TC-TASK-008","Cancel task deletion","Confirm canceling the destructive action preserves the task.","Functional","Medium","FR-TASK-005","AC-US003-07","Member owns a task.","Owned task","1. Select Delete.
 2. Cancel the confirmation.
-3. Refresh the page.","The task remains present and unchanged.","task; delete; usability","Partial","Draft","v1.0"
+3. Refresh the page.","The task remains present and unchanged.","task; delete; usability","Partial","Approved","v1.0"
 "TC-TASK-009","Confirm task deletion","Confirm an owned task can be deleted after confirmation.","Functional","Critical","FR-TASK-005","AC-US003-08; AC-US003-09","Member owns a disposable synthetic task.","Disposable task","1. Select Delete.
 2. Confirm the action.
 3. Search for the deleted title.
-4. Refresh the page.","The task remains absent and a clear deletion message is shown.","task; delete; regression","Yes","Draft","v1.0"
+4. Refresh the page.","The task remains absent and a clear deletion message is shown.","task; delete; regression","Yes","Approved","v1.0"
 "TC-SEARCH-001","Search task title case-insensitively","Confirm title search returns matching owned tasks regardless of case.","Functional","High","FR-TASK-006","AC-US004-01","Member owns tasks with distinct titles.","Search term using different letter case","1. Enter a partial title with different letter case.
-2. Review results.","Only owned tasks with matching titles or descriptions appear.","search; positive; regression","Yes","Draft","v1.0"
-"TC-SEARCH-002","Search task description","Confirm description text participates in search.","Functional","Medium","FR-TASK-006","AC-US004-01","Member owns a task with a unique description term.","Unique description term","1. Search for the unique description term.","The matching task appears even when its title does not contain the term.","search; description","Yes","Draft","v1.0"
-"TC-SEARCH-003","Show empty state for no matches","Confirm no-match search is understandable and not treated as an error.","Usability","Medium","FR-TASK-006","AC-US004-02","Member is signed in.","Term that matches no task","1. Search for a nonexistent term.","No task cards appear and the empty-state message is displayed without an error.","search; empty-state; usability","Yes","Draft","v1.0"
+2. Review results.","Only owned tasks with matching titles or descriptions appear.","search; positive; regression","Yes","Approved","v1.0"
+"TC-SEARCH-002","Search task description","Confirm description text participates in search.","Functional","Medium","FR-TASK-006","AC-US004-01","Member owns a task with a unique description term.","Unique description term","1. Search for the unique description term.","The matching task appears even when its title does not contain the term.","search; description","Yes","Approved","v1.0"
+"TC-SEARCH-003","Show empty state for no matches","Confirm no-match search is understandable and not treated as an error.","Usability","Medium","FR-TASK-006","AC-US004-02","Member is signed in.","Term that matches no task","1. Search for a nonexistent term.","No task cards appear and the empty-state message is displayed without an error.","search; empty-state; usability","Yes","Approved","v1.0"
 "TC-SEARCH-004","Filter active tasks","Confirm Active excludes completed tasks.","Functional","High","FR-TASK-006","AC-US004-03","Member owns at least one active and one completed task.","Mixed task states","1. Clear search.
-2. Select Active.","Every displayed task is active and completed tasks are absent.","filter; active; regression","Yes","Draft","v1.0"
+2. Select Active.","Every displayed task is active and completed tasks are absent.","filter; active; regression","Yes","Approved","v1.0"
 "TC-SEARCH-005","Filter completed tasks","Confirm Completed excludes active tasks.","Functional","High","FR-TASK-006","AC-US004-04","Member owns at least one active and one completed task.","Mixed task states","1. Clear search.
-2. Select Completed.","Every displayed task is completed and active tasks are absent.","filter; completed; regression","Yes","Draft","v1.0"
+2. Select Completed.","Every displayed task is completed and active tasks are absent.","filter; completed; regression","Yes","Approved","v1.0"
 "TC-SEARCH-006","Combine search and status filter","Confirm every result satisfies both search and status conditions.","Regression","Critical","FR-TASK-006","AC-US004-05","Member owns matching active and completed tasks plus nonmatching tasks.","Shared search term; Active then Completed","1. Enter the shared term.
 2. Select Active and record results.
-3. Select Completed and record results.","Each result matches the term and the selected state; no task from the opposite state appears.","filter; search; controlled-defect","Yes","Draft","v1.0"
+3. Select Completed and record results.","Each result matches the term and the selected state; no task from the opposite state appears.","filter; search; controlled-defect","Yes","Approved","v1.0"
 "TC-SEARCH-007","Display all owned tasks","Confirm All with no search returns the complete personal list.","Functional","Medium","FR-TASK-006","AC-US004-06","Member owns multiple tasks.","Known count of owned tasks","1. Clear search.
 2. Select All.
-3. Compare displayed tasks with the known personal list.","Every owned task appears once and no other user task appears.","filter; all; regression","Yes","Draft","v1.0"
+3. Compare displayed tasks with the known personal list.","Every owned task appears once and no other user task appears.","filter; all; regression","Yes","Approved","v1.0"
 "TC-ADMIN-001","Administrator views team tasks","Confirm team oversight includes owner identification for all users.","Functional","Critical","FR-ADMIN-001","AC-US006-01","Administrator and at least two members exist with tasks.","Synthetic administrator and member tasks","1. Sign in as administrator.
 2. Select All users tasks.
-3. Review owners and records.","Tasks from each user appear with the correct owner name and email.","admin; oversight; regression","Yes","Draft","v1.0"
+3. Review owners and records.","Tasks from each user appear with the correct owner name and email.","admin; oversight; regression","Yes","Approved","v1.0"
 "TC-ADMIN-002","Other-user tasks are read-only in team view","Confirm administrator UI does not offer mutations for another user task.","Authorization","Critical","FR-ADMIN-002; FR-AUTHZ-001","AC-US006-02; AC-US006-03","Administrator is in team view and another user owns a task.","Other-user task","1. Locate another user task.
 2. Inspect available actions.
-3. Attempt direct member-route update using the task ID.","No mutation controls appear, the direct request is rejected, and the task remains unchanged.","admin; authorization; negative","Partial","Draft","v1.0"
+3. Attempt direct member-route update using the task ID.","No mutation controls appear, the direct request is rejected, and the task remains unchanged.","admin; authorization; negative","Partial","Approved","v1.0"
 "TC-ADMIN-003","Member cannot access team oversight","Confirm team oversight is not available to a member.","Authorization","Critical","FR-ADMIN-001; FR-AUTHZ-001","AC-US006-04","Member is signed in.","Authenticated member","1. Confirm no team-view control is displayed.
-2. Request the administrator task endpoint with the member token.","The UI offers no team view and the endpoint returns 403 without team data.","admin; authorization; negative","Partial","Draft","v1.0"
+2. Request the administrator task endpoint with the member token.","The UI offers no team view and the endpoint returns 403 without team data.","admin; authorization; negative","Partial","Approved","v1.0"
 "TC-ADMIN-004","Administrator returns to personal task view","Confirm the administrator can isolate and manage only their own tasks.","Functional","High","FR-ADMIN-001; FR-AUTHZ-001","AC-US006-05","Administrator and another user each own a uniquely named task.","Administrator-owned and other-user tasks","1. Sign in as administrator.
 2. Select My tasks.
 3. Compare the list with known ownership.
-4. Edit the administrator-owned task.","Only administrator-owned tasks appear and the administrator can edit their own task.","admin; ownership; regression","Yes","Draft","v1.0"
+4. Edit the administrator-owned task.","Only administrator-owned tasks appear and the administrator can edit their own task.","admin; ownership; regression","Yes","Approved","v1.0"
 "TC-AUTHZ-001","Members see only their own tasks","Confirm task-list isolation between two member accounts.","Authorization","Critical","FR-AUTHZ-001","AC-US007-01","Two members each own uniquely named tasks.","member.one@example.test; member.two@example.test","1. Sign in as member one and record visible tasks.
 2. Sign out.
-3. Sign in as member two and record visible tasks.","Each member sees only their own tasks and neither list exposes the other member record.","ownership; authorization; regression","Yes","Draft","v1.0"
+3. Sign in as member two and record visible tasks.","Each member sees only their own tasks and neither list exposes the other member record.","ownership; authorization; regression","Yes","Approved","v1.0"
 "TC-ACCESS-001","Complete core workflow with keyboard only","Confirm critical controls are reachable, operable, ordered, and visibly focused.","Accessibility","Critical","NFR-ACC-001; NFR-ACC-004","AC-US008-01; AC-US008-02","Corrected baseline is running; mouse is not used.","Synthetic account and disposable task","1. Register or sign in using keyboard only.
 2. Create, complete, filter, and delete a task.
 3. Update the profile.
-4. Sign out.","Every required control is reached in a logical order, activates from the keyboard, and shows visible focus.","accessibility; keyboard; manual","No","Draft","v1.0"
+4. Sign out.","Every required control is reached in a logical order, activates from the keyboard, and shows visible focus.","accessibility; keyboard; manual","No","Approved","v1.0"
 "TC-ACCESS-002","Review names, feedback, and page structure","Confirm controls, messages, headings, and regions expose understandable semantics.","Accessibility","Critical","NFR-ACC-002; NFR-ACC-003; NFR-ACC-005","AC-US008-03; AC-US008-04; AC-US008-05; AC-US008-07","Corrected baseline is running; NVDA is available.","Valid and invalid form actions","1. Review controls and headings with NVDA.
 2. Trigger a validation error.
 3. Complete a successful action.
-4. Record announcements and structure.","Controls have descriptive names, page structure is logical, and new error and success messages are announced.","accessibility; NVDA; manual","No","Draft","v1.0"
+4. Record announcements and structure.","Controls have descriptive names, page structure is logical, and new error and success messages are announced.","accessibility; NVDA; manual","No","Approved","v1.0"
 "TC-ACCESS-003","Measure text and component contrast","Confirm applicable foreground, background, focus, and component colors meet project targets.","Accessibility","High","NFR-ACC-004","AC-US008-02; AC-US008-06","Corrected baseline is running; contrast measurement tool is available.","Representative normal, hover, error, success, and focus states","1. Identify text and interactive color pairs.
 2. Measure normal and focus states.
-3. Record ratios and applicable thresholds.","Each applicable pair meets its WCAG 2.2 AA project target or is recorded as a finding.","accessibility; contrast; manual","No","Draft","v1.0"
+3. Record ratios and applicable thresholds.","Each applicable pair meets its WCAG 2.2 AA project target or is recorded as a finding.","accessibility; contrast; manual","No","Approved","v1.0"
 "TC-COMPAT-001","Review responsive core workflows","Confirm required content remains usable at narrow and desktop widths.","Compatibility","High","NFR-COMPAT-001","AC-US008-08","Current stable Chrome is available.","Viewport widths: 320, 760, 1280 pixels","1. At each target width, sign in and review task creation, filters, task actions, profile, and sign-out.
-2. Check for clipping and unintended horizontal scrolling.","Content is readable and required controls remain visible and operable at each width.","responsive; Chrome; manual","Partial","Draft","v1.0"
+2. Check for clipping and unintended horizontal scrolling.","Content is readable and required controls remain visible and operable at each width.","responsive; Chrome; manual","Partial","Approved","v1.0"
 "TC-REMOTE-001","Refresh valid session without repeating action","Confirm refresh preserves a valid session and does not repeat the last mutation.","Recovery","High","NFR-REL-001; NFR-REMOTE-001","AC-US002-04; AC-US009-01","Member has a valid session and just created one uniquely named task.","Single uniquely named task","1. Record the task count.
 2. Refresh the page.
-3. Recheck session, task count, and task state.","The member remains signed in, the task appears once, and no mutation is repeated.","remote; refresh; reliability","Yes","Draft","v1.0"
+3. Recheck session, task count, and task state.","The member remains signed in, the task appears once, and no mutation is repeated.","remote; refresh; reliability","Yes","Approved","v1.0"
 "TC-REMOTE-002","Recover from simulated connection interruption","Confirm failure and reconnection do not change authorization or falsely report success.","Recovery","High","NFR-REMOTE-001","AC-US009-03; AC-US009-04","Member is signed in; local backend can be paused safely.","Disposable task mutation","1. Pause the local backend.
 2. Attempt one task mutation.
 3. Record feedback.
 4. Restore the backend and sign in if required.
-5. Verify task and role state.","No false success is shown; after recovery, authorization is unchanged and the task reflects only confirmed operations.","remote; interruption; reliability","Partial","Draft","v1.0"
+5. Verify task and role state.","No false success is shown; after recovery, authorization is unchanged and the task reflects only confirmed operations.","remote; interruption; reliability","Partial","Approved","v1.0"
 "TC-USABILITY-001","Review action feedback and destructive clarity","Confirm common actions communicate outcome and deletion is clearly distinguished.","Usability","Medium","FR-TASK-005; NFR-ACC-003","AC-US003-07; AC-US003-09","Member is signed in with a disposable task.","Create, update, complete, reopen, cancel delete, confirm delete","1. Perform each listed action in sequence.
 2. Observe labels, messages, and confirmation wording.
-3. Note confusion separately from requirement failures.","Each action has understandable wording and feedback, and deletion requires explicit confirmation.","usability; exploratory; manual","No","Draft","v1.0"
+3. Note confusion separately from requirement failures.","Each action has understandable wording and feedback, and deletion requires explicit confirmation.","usability; exploratory; manual","No","Approved","v1.0"

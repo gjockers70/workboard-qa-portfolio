@@ -161,13 +161,14 @@ export default function App() {
     setSession(null)
     setTasks([])
     setTaskView('mine')
+    setRegistering(false)
     setMessage('Signed out')
   }
 
   const feedback = error
-    ? <div className="alert error" role={seededAccessibilityDefects ? undefined : 'alert'}>{error}</div>
+    ? <div className="alert error" data-testid="feedback" role={seededAccessibilityDefects ? undefined : 'alert'}>{error}</div>
     : message
-      ? <div className="alert success" role={seededAccessibilityDefects ? undefined : 'status'}>{message}</div>
+      ? <div className="alert success" data-testid="feedback" role={seededAccessibilityDefects ? undefined : 'status'}>{message}</div>
       : null
 
   if (!session) {
@@ -198,7 +199,7 @@ export default function App() {
     <div className={`app-shell ${seededAccessibilityDefects ? 'seeded-focus-defect' : ''}`}>
       <header>
         <div><p className="eyebrow">WorkBoard</p><h1>{taskView === 'all' ? 'Team tasks' : 'Your tasks'}</h1></div>
-        <div className="profile"><span>{session.user.display_name} · {session.user.role}</span><button className="secondary" onClick={logout}>Sign out</button></div>
+        <div className="profile"><span>{session.user.display_name} · {session.user.role}</span><button className="secondary" data-testid="sign-out" onClick={logout}>Sign out</button></div>
       </header>
       <main className="workspace">
         <aside className="sidebar-stack">
@@ -215,15 +216,15 @@ export default function App() {
             <h2>Profile</h2>
             <form onSubmit={saveProfile}>
               <label>Display name<input data-testid="profile-name" value={profileName} onChange={(event) => setProfileName(event.target.value)} minLength={2} required /></label>
-              <button className="secondary" disabled={busy}>Save profile</button>
+              <button className="secondary" data-testid="save-profile" disabled={busy}>Save profile</button>
             </form>
           </section>
         </aside>
         <section className="task-area">
           {session.user.role === 'admin' && (
             <div className="view-switcher" aria-label="Task view">
-              <button className={taskView === 'mine' ? '' : 'secondary'} onClick={() => setTaskView('mine')}>My tasks</button>
-              <button className={taskView === 'all' ? '' : 'secondary'} onClick={() => setTaskView('all')}>All users' tasks</button>
+              <button className={taskView === 'mine' ? '' : 'secondary'} data-testid="my-tasks" onClick={() => setTaskView('mine')}>My tasks</button>
+              <button className={taskView === 'all' ? '' : 'secondary'} data-testid="team-tasks" onClick={() => setTaskView('all')}>All users' tasks</button>
             </div>
           )}
           {taskView === 'mine' ? (
@@ -238,20 +239,20 @@ export default function App() {
           ) : <p className="view-note">Administrator oversight is read-only for tasks owned by other users.</p>}
           <div className="task-list" data-testid="task-list">
             {tasks.length === 0 ? <div className="empty"><h2>No tasks found</h2><p>Create a task or change the current filters.</p></div> : tasks.map((task) => (
-              <article className={`card task ${task.completed ? 'done' : ''}`} key={task.id}>
+              <article className={`card task ${task.completed ? 'done' : ''}`} data-testid="task-card" key={task.id}>
                 <div>
-                  {seededAccessibilityDefects ? <h3>{task.title}</h3> : <h2>{task.title}</h2>}
+                  {seededAccessibilityDefects ? <h3 data-testid="task-title-text">{task.title}</h3> : <h2 data-testid="task-title-text">{task.title}</h2>}
                   {task.owner_name && <p className="owner">Owner: {task.owner_name} ({task.owner_email})</p>}
-                  <p>{task.description || 'No description'}</p>
+                  <p data-testid="task-description-text">{task.description || 'No description'}</p>
                 </div>
                 {canChangeTask(task) && (
                   <div className="task-actions">
-                    <button className="secondary" onClick={() => void toggleTask(task)}>{task.completed ? 'Reopen' : 'Complete'}</button>
-                    <button className="secondary" onClick={() => void editTask(task)}>Edit</button>
+                    <button className="secondary" data-testid="task-toggle" onClick={() => void toggleTask(task)}>{task.completed ? 'Reopen' : 'Complete'}</button>
+                    <button className="secondary" data-testid="task-edit" onClick={() => void editTask(task)}>Edit</button>
                     {seededAccessibilityDefects ? (
-                      <button className="danger" onClick={() => void removeTask(task)}><span aria-hidden="true">×</span></button>
+                      <button className="danger" data-testid="task-delete" onClick={() => void removeTask(task)}><span aria-hidden="true">×</span></button>
                     ) : (
-                      <button className="danger" onClick={() => void removeTask(task)}>Delete</button>
+                      <button className="danger" data-testid="task-delete" onClick={() => void removeTask(task)}>Delete</button>
                     )}
                   </div>
                 )}

@@ -53,7 +53,7 @@ A failed case becomes a defect candidate only after reproduction. Record the fai
 | Automation Candidate | Future automation disposition |
 | Status | Draft or approved case state, not execution result |
 
-Execution status, evidence, linked defects, and tester/date fields belong in a separate test execution record created during Phase 9.
+Execution status, evidence, linked defects, and tester/date fields belong in separate execution records. The initial Phase 3 cycle is recorded in `TEST_EXECUTIONS.csv` and `PHASE_3_EXECUTION_REGISTER.xlsx`; Phase 9 will extend this structure with broader cycle and traceability management.
 
 ## Phase 3 coverage boundary
 

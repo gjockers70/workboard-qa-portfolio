@@ -1,8 +1,14 @@
 # WorkBoard Test Automation Architecture
 
-## Phase 4 framework boundary
+## Phase 4 framework foundation
 
-This phase creates the reusable Selenium foundation and one authenticated smoke test. It does not claim broad functional or regression coverage. Phase 5 will add workflow coverage after this structure is approved.
+Phase 4 created the reusable Selenium foundation and one authenticated smoke test.
+
+## Phase 5 automation boundary
+
+Phase 5 adds browser-functional and regression coverage for registration, sign-in rejection, sign-out, task creation and mutation, validation, combined search and filtering, profile persistence, and administrator read-only oversight. Direct API assertions, SQL validation, accessibility evaluation, and performance measurement remain assigned to later phases.
+
+Each member scenario registers a unique synthetic identity through the interface. Tests own uniquely named tasks and delete them when safe. The administrator scenario reads credentials from environment variables because privileged credentials must not be stored in source control.
 
 ## Layers
 
@@ -66,7 +72,16 @@ Fixed sleeps are unreliable because they wait too long on fast systems and may s
 
 ## Test data and credentials
 
-Authenticated tests read credentials from `WORKBOARD_TEST_USER_EMAIL` and `WORKBOARD_TEST_USER_PASSWORD`. Values are never stored in the repository. Tests use synthetic identities only.
+Member scenarios create unique synthetic accounts through the browser. The administrator scenario reads credentials from `WORKBOARD_TEST_USER_EMAIL` and `WORKBOARD_TEST_USER_PASSWORD`. Values are never stored in the repository. Tests use synthetic identities only.
+
+## Phase 5 execution profiles
+
+- `smoke` covers release-gating browser workflows.
+- `functional` covers user-visible behavior against approved requirements.
+- `negative` covers rejected credentials and invalid values.
+- `regression` covers stable workflows rerun after changes.
+
+The markers overlap intentionally because one scenario can be both functional and regression-critical. Marker selection changes execution scope; it does not duplicate the test implementation.
 
 ## Reporting and failure evidence
 

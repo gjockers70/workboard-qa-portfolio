@@ -23,9 +23,9 @@ The repository currently contains the approved application, project-management a
 |---|---|---|
 | Phase 1 — Demo application | Approved and published | React/FastAPI/SQLite application and verified member/admin workflows |
 | Phase 2 — Backlog, requirements, and acceptance criteria | Approved and published | [Requirements](docs/REQUIREMENTS.md), [Product backlog](agile/PRODUCT_BACKLOG.md), [User stories](agile/USER_STORIES.md), [Acceptance criteria](agile/ACCEPTANCE_CRITERIA.md), [Sprint plan](agile/SPRINT_PLAN.md) |
-| Phase 3 — Manual test plan and cases | Approved and published | [Test plan](TEST_PLAN.md), [execution guide](test-management/MANUAL_EXECUTION_GUIDE.md), [CSV register](test-management/TEST_CASES.csv), and [formatted register](test-management/TEST_CASES.xlsx) |
+| Phase 3 — Manual test plan and cases | Execution approved locally | 37 of 37 cases have a final Pass result; two findings were corrected and passed retest. See the [execution CSV](test-management/TEST_EXECUTIONS.csv) and [formatted execution register](test-management/PHASE_3_EXECUTION_REGISTER.xlsx) |
 | Phase 4 — Selenium framework | Approved and published | Browser fixtures, Page Objects, explicit waits, failure screenshots, HTML/JUnit reporting, and verified Brave and Edge smoke tests |
-| Phase 5 — Functional and regression automation | Not started | Awaiting Phase 5 authorization |
+| Phase 5 — Functional and regression automation | Implemented locally; awaiting approval | Eight Brave UI tests pass, including six tests selected by the regression marker |
 
 ## Local setup
 
@@ -83,7 +83,7 @@ Install the test dependencies into the project virtual environment:
 .venv\Scripts\python -m pip install -r requirements-test.txt
 ```
 
-Provide a synthetic local test account through temporary environment variables, then run the smoke marker:
+Most member tests register a unique synthetic account through the browser. The administrator scenario reads a synthetic local administrator from temporary environment variables. Run the smoke marker with:
 
 ```powershell
 $env:WORKBOARD_TEST_USER_EMAIL = "synthetic.user@example.test"
@@ -93,4 +93,18 @@ Remove-Item Env:WORKBOARD_TEST_USER_EMAIL
 Remove-Item Env:WORKBOARD_TEST_USER_PASSWORD
 ```
 
+Run the Phase 5 regression marker with:
+
+```powershell
+.venv\Scripts\python -m pytest -m regression --browser brave
+```
+
+Run the complete browser suite with:
+
+```powershell
+.venv\Scripts\python -m pytest tests/ui --browser brave
+```
+
 The framework defaults to verified headless Brave execution using a disposable test profile. It writes a self-contained HTML report, JUnit XML, and failure screenshots under the ignored `reports/` directory. Edge is also verified locally and can be selected with `--browser edge`. Google Chrome can be selected with `--browser chrome`, but compatibility is not claimed until that browser completes the suite successfully.
+
+The current local Phase 5 execution has six passing regression tests and eight passing UI tests overall. The sign-out navigation failure discovered during implementation was corrected and passed focused and full-suite retesting.

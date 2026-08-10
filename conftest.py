@@ -3,7 +3,10 @@ import pytest
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from framework.config.settings import Settings, load_settings
+from framework.data.factories import SyntheticUser, synthetic_user
 from framework.drivers.browser import close_driver, create_driver
+from framework.pages.login_page import LoginPage
+from framework.pages.workspace_page import WorkspacePage
 from framework.utilities.artifacts import save_failure_screenshot
 
 
@@ -53,3 +56,20 @@ def test_credentials(settings: Settings) -> tuple[str, str]:
     if not settings.test_user_email or not settings.test_user_password:
         pytest.skip("Set WORKBOARD_TEST_USER_EMAIL and WORKBOARD_TEST_USER_PASSWORD for authenticated UI tests.")
     return settings.test_user_email, settings.test_user_password
+
+
+@pytest.fixture
+def member_data() -> SyntheticUser:
+    return synthetic_user()
+
+
+@pytest.fixture
+def registered_workspace(
+    driver: WebDriver,
+    settings: Settings,
+    member_data: SyntheticUser,
+) -> tuple[SyntheticUser, WorkspacePage]:
+    login_page = LoginPage(driver, settings.base_url, settings.explicit_wait_seconds).load()
+    login_page.register(member_data.display_name, member_data.email, member_data.password)
+    workspace = WorkspacePage(driver, settings.base_url, settings.explicit_wait_seconds).wait_until_loaded()
+    return member_data, workspace

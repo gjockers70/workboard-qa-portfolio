@@ -1,5 +1,6 @@
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as expected
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -27,9 +28,11 @@ class BasePage:
 
     def fill(self, locator: Locator, value: str) -> None:
         element = self.visible(locator)
-        element.clear()
-        element.send_keys(value)
+        element.click()
+        element.send_keys(Keys.CONTROL, "a")
+        element.send_keys(Keys.BACKSPACE)
+        if value:
+            element.send_keys(value)
 
     def text(self, locator: Locator) -> str:
         return self.visible(locator).text.strip()
-

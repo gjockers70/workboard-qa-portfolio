@@ -5,7 +5,7 @@
 | Field | Value |
 |---|---|
 | Project | WorkBoard QA Portfolio |
-| Plan status | Draft for Phase 3 review |
+| Plan status | Approved; Phase 3 execution complete locally |
 | Product baseline | Local React, FastAPI, and SQLite application |
 | Test approach | Risk-based, traceable, incremental |
 | Cost target | $0 using local and free tools |
@@ -262,5 +262,4 @@ LOE is built from scope size, test-data needs, environment setup, automation com
 
 ## 20. Approval checkpoint
 
-Phase 3 approval confirms that the scope, risk priorities, entry/exit criteria, manual test catalog, and proposed estimates are suitable for the next implementation phase. It does not record any case as executed.
-
+Phase 3 approval confirmed that the scope, risk priorities, entry/exit criteria, manual test catalog, and proposed estimates were suitable. The completed local execution is recorded separately in `test-management/TEST_EXECUTIONS.csv` and `test-management/PHASE_3_EXECUTION_REGISTER.xlsx`; publication remains subject to the next checkpoint approval.
