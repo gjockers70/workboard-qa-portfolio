@@ -21,3 +21,10 @@
 ## Release-readiness decision at this checkpoint
 
 The completed regression cycle supported continuing to Phase 10 because all six selected regression checks passed and no Critical or Major defect remained open. At that checkpoint, performance and simulated UAT were still planned; both now have completed later-cycle records. Pipeline gates and final reporting remain planned, so this is still not the final release recommendation.
+
+## Sprint 4 â€” Performance, simulated UAT, and retest assurance
+
+- Demonstrated the bounded local load baseline and a disclosed single-person business acceptance exercise.
+- Reconciled all four genuine defects through original failure, approved correction, source-cycle retest, Phase 12 independent confirmation, and adjacent regression.
+- Evidence: 10 of 10 managed Phase 12 executions passed and the corresponding focused browser commands produced 12 passing automated checks.
+- Improvement carried forward: classification comes before correction; requirement misunderstandings and deferred enhancements must not be relabeled as defects to manufacture remediation work.

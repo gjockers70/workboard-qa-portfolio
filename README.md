@@ -15,7 +15,7 @@ The application includes:
 - FastAPI backend
 - SQLite persistence through SQLAlchemy
 
-The repository contains the approved application and test evidence through Phase 11.
+The repository contains the approved application and test evidence through Phase 12.
 
 ## Project progress
 
@@ -32,6 +32,7 @@ The repository contains the approved application and test evidence through Phase
 | Phase 9 - Agile test management and traceability | Approved and published | Jira/Confluence/Zephyr mapping, cycles, executions, defect lifecycle, traceability, and sprint test summary |
 | Phase 10 - Performance testing | Approved and published | Loopback-only Locust workload passed at 10 users with 749 authenticated reads, 17 ms p95, 25.45 req/s, and 0.0000% errors |
 | Phase 11 - UAT planning and simulated client session | Approved and published | Six passing business scenarios, 20 passing focused checks, 114 passing project tests, one clarified misunderstanding, one deferred enhancement, and no confirmed UAT defect |
+| Phase 12 - Remediation and retesting | Approved and published | Four closed defects independently confirmed, six managed regression cases passed, 12 focused checks passed, all 121 project tests passed, and no UAT observation was misclassified as a corrected defect |
 
 ## Agile Test Management
 
@@ -200,3 +201,13 @@ All six scenarios passed. The session recorded one requirement misunderstanding 
 The focused UAT and management verification passed 20 tests, including two Brave business-workflow replays. The complete project regression passed all 114 tests.
 
 See the [UAT plan](uat/UAT_PLAN.md), [scenario cards](uat/UAT_SCENARIOS.md), [session notes](uat/UAT_SESSION_NOTES.md), [issue and defect log](uat/UAT_DEFECT_LOG.md), [summary](uat/UAT_SUMMARY.md), and [sign-off template](uat/UAT_SIGNOFF_TEMPLATE.md).
+
+## Remediation and retesting
+
+Phase 12 consolidates every genuine defect into an auditable failure-to-closure chain and then independently confirms the corrected behaviors in Brave. The managed cycle contains four defect confirmations and six impact-based regression cases. The focused commands produce 12 automated checks because the responsive compatibility case runs at three viewport widths.
+
+No application change was required in this phase. All four defects had already been corrected and closed in their source cycles, and Phase 11 produced no product defect. The clarified UAT misunderstanding remains non-defect evidence, while the due-date and priority request remains deferred as ENH-002 rather than being represented as a correction.
+
+The complete project suite passed all 121 tests with no skips, and the frontend production build passed.
+
+See the [remediation plan](remediation/REMEDIATION_PLAN.md), [impact analysis](remediation/REGRESSION_IMPACT_ANALYSIS.md), [defect retest matrix](remediation/DEFECT_RETEST_MATRIX.csv), [execution guide](remediation/RETEST_EXECUTION_GUIDE.md), and [Phase 12 summary](remediation/PHASE_12_RETEST_SUMMARY.md).
