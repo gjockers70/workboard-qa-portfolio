@@ -2,9 +2,9 @@
 
 WorkBoard is a small full-stack task application used to practice software testing across the user interface, REST API, and database layers.
 
-## Phase 1 checkpoint
+## Application scope
 
-This checkpoint contains the smallest usable application slice:
+The application includes:
 
 - account registration and login
 - authenticated profile retrieval
@@ -15,17 +15,17 @@ This checkpoint contains the smallest usable application slice:
 - FastAPI backend
 - SQLite persistence through SQLAlchemy
 
-The test framework and project-management artifacts will be added incrementally in later phases.
+The repository currently contains the approved application, project-management artifacts, manual test suite, and Selenium foundation through Phase 4.
 
 ## Project progress
 
 | Phase | Status | Evidence |
 |---|---|---|
-| Phase 1 — Demo application | Complete locally, pending repository checkpoint | React/FastAPI/SQLite application and verified member/admin workflows |
-| Phase 2 — Backlog, requirements, and acceptance criteria | Ready for review | [Requirements](docs/REQUIREMENTS.md), [Product backlog](agile/PRODUCT_BACKLOG.md), [User stories](agile/USER_STORIES.md), [Acceptance criteria](agile/ACCEPTANCE_CRITERIA.md), [Sprint plan](agile/SPRINT_PLAN.md) |
-| Phase 3 — Manual test plan and cases | Ready for review | [Test plan](TEST_PLAN.md), [execution guide](test-management/MANUAL_EXECUTION_GUIDE.md), [CSV register](test-management/TEST_CASES.csv), and [formatted register](test-management/TEST_CASES.xlsx) |
-| Phase 4 — Selenium framework | Ready for review | Browser fixtures, Page Objects, explicit waits, failure screenshots, HTML/JUnit reporting, and verified Brave and Edge smoke tests |
-| Phase 5 — Functional and regression automation | Not started | Begins after Phase 4 approval |
+| Phase 1 — Demo application | Approved and published | React/FastAPI/SQLite application and verified member/admin workflows |
+| Phase 2 — Backlog, requirements, and acceptance criteria | Approved and published | [Requirements](docs/REQUIREMENTS.md), [Product backlog](agile/PRODUCT_BACKLOG.md), [User stories](agile/USER_STORIES.md), [Acceptance criteria](agile/ACCEPTANCE_CRITERIA.md), [Sprint plan](agile/SPRINT_PLAN.md) |
+| Phase 3 — Manual test plan and cases | Approved and published | [Test plan](TEST_PLAN.md), [execution guide](test-management/MANUAL_EXECUTION_GUIDE.md), [CSV register](test-management/TEST_CASES.csv), and [formatted register](test-management/TEST_CASES.xlsx) |
+| Phase 4 — Selenium framework | Approved and published | Browser fixtures, Page Objects, explicit waits, failure screenshots, HTML/JUnit reporting, and verified Brave and Edge smoke tests |
+| Phase 5 — Functional and regression automation | Not started | Awaiting Phase 5 authorization |
 
 ## Local setup
 
