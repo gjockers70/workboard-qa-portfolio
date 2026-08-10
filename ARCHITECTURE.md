@@ -101,6 +101,24 @@ The markers overlap intentionally because one scenario can be both functional an
 
 The timing assertions observe one request at a time against the local service. They are not concurrency, percentile, throughput, or production-capacity measurements. SQL row validation remains a Phase 7 responsibility.
 
+## Phase 7 database boundary
+
+`app/backend/app/database.py` provides the shared engine factory used by both the application and isolated tests. SQLite connections explicitly enable foreign-key enforcement so ownership references and cascading deletes are real database constraints rather than documentation-only declarations. `WORKBOARD_DATABASE_URL` permits controlled environment configuration without hard-coded credentials.
+
+`framework/database/inspector.py` contains small parameterized SQL inspection methods for users, tasks, counts, ownership, and combined search/state results. Keeping those queries independent of API response construction makes cross-layer comparisons meaningful.
+
+`tests/database/` creates a temporary SQLite file for each case, builds the production schema, and overrides only the FastAPI database dependency. Coverage includes:
+
+- table, column, index, uniqueness, nullability, and foreign-key metadata;
+- normalized user persistence and salted password hashes;
+- duplicate and null rejection with transaction rollback;
+- task defaults, transformations, ownership, updates, and deletion;
+- unchanged values and counts after unauthorized update/delete requests;
+- orphan rejection and cascading user/task deletion;
+- owner-specific row counts and API result IDs compared with independent SQL.
+
+The isolated fixtures prevent test ordering from contaminating results and never modify the development database. PostgreSQL portability and migration tooling remain optional future enhancements rather than validated Phase 7 claims.
+
 ## Reporting and failure evidence
 
 Every run produces:

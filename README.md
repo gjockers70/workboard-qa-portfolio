@@ -23,10 +23,11 @@ The repository currently contains the approved application, project-management a
 |---|---|---|
 | Phase 1 — Demo application | Approved and published | React/FastAPI/SQLite application and verified member/admin workflows |
 | Phase 2 — Backlog, requirements, and acceptance criteria | Approved and published | [Requirements](docs/REQUIREMENTS.md), [Product backlog](agile/PRODUCT_BACKLOG.md), [User stories](agile/USER_STORIES.md), [Acceptance criteria](agile/ACCEPTANCE_CRITERIA.md), [Sprint plan](agile/SPRINT_PLAN.md) |
-| Phase 3 — Manual test plan and cases | Execution approved locally | 37 of 37 cases have a final Pass result; two findings were corrected and passed retest. See the [execution CSV](test-management/TEST_EXECUTIONS.csv) and [formatted execution register](test-management/PHASE_3_EXECUTION_REGISTER.xlsx) |
+| Phase 3 — Manual test plan and cases | Approved and published | 37 of 37 cases have a final Pass result; two findings were corrected and passed retest. See the [execution CSV](test-management/TEST_EXECUTIONS.csv) and [formatted execution register](test-management/PHASE_3_EXECUTION_REGISTER.xlsx) |
 | Phase 4 — Selenium framework | Approved and published | Browser fixtures, Page Objects, explicit waits, failure screenshots, HTML/JUnit reporting, and verified Brave and Edge smoke tests |
 | Phase 5 — Functional and regression automation | Approved and published | Eight Brave UI tests pass, including six tests selected by the regression marker |
-| Phase 6 — API and web-services testing | Approved locally; commit and upload pending | Reusable HTTP client, strict response contracts, authentication/authorization coverage, CRUD and validation tests, controlled 5xx handling, and 24 passing API tests |
+| Phase 6 — API and web-services testing | Approved and published | Reusable HTTP client, strict response contracts, authentication/authorization coverage, CRUD and validation tests, controlled 5xx handling, and 24 passing API tests |
+| Phase 7 — SQL and database testing | Approved and published | Isolated SQLite fixtures, reusable SQL inspection, schema and constraint checks, persistence and row-count validation, API-to-database comparisons, and 16 passing database tests |
 
 ## Local setup
 
@@ -125,3 +126,15 @@ Remove-Item Env:WORKBOARD_TEST_USER_PASSWORD
 ```
 
 The local Phase 6 run has 24 passing tests. Timing checks are single-request development observations, not load-test results or production-capacity claims. Database-state assertions remain assigned to Phase 7.
+
+## Database testing
+
+Phase 7 runs against a new temporary SQLite file for every test. The development database is never used as test data, and the temporary engine uses the same foreign-key configuration as the application.
+
+Run the isolated database suite with:
+
+```powershell
+.venv\Scripts\python -m pytest tests/database -W error::DeprecationWarning
+```
+
+The suite validates schema columns, required values, unique email enforcement, foreign keys, cascading deletes, salted password storage, inserts, transformations, updates, deletes, owner-specific row counts, unchanged state after rejected authorization, and API results against independent SQL queries. The local Phase 7 run has 16 passing tests with deprecation warnings treated as failures.
