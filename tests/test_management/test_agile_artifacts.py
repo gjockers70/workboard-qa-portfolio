@@ -43,9 +43,9 @@ def test_required_phase9_artifacts_and_csv_headers_are_present() -> None:
 
 def test_register_identifiers_are_unique() -> None:
     registers = RegisterSet.load(ROOT)
-    assert len(registers.unique_values(registers.cases, "Test Case ID")) == 49
+    assert len(registers.unique_values(registers.cases, "Test Case ID")) == 55
     assert len(registers.unique_values(registers.cycles, "Cycle ID")) == 8
-    assert len(registers.unique_values(registers.executions, "Execution ID")) == 54
+    assert len(registers.unique_values(registers.executions, "Execution ID")) == 60
 
 
 def test_execution_references_resolve_to_cases_and_cycles() -> None:
@@ -86,7 +86,7 @@ def test_traceability_has_a_resolvable_chain_for_every_story() -> None:
 def test_completed_cycle_counts_reconcile() -> None:
     registers = RegisterSet.load(ROOT)
     completed = [row for row in registers.cycles if row["Status"] == "Completed"]
-    assert len(completed) == 7
+    assert len(completed) == 8
     for row in completed:
         planned = int(row["Planned Tests"])
         accounted = sum(int(row[column]) for column in ("Passed", "Failed", "Blocked", "Not Run"))

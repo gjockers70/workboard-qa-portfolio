@@ -15,7 +15,7 @@ The application includes:
 - FastAPI backend
 - SQLite persistence through SQLAlchemy
 
-The repository contains the approved application and test evidence through Phase 10.
+The repository contains the approved application and test evidence through Phase 11.
 
 ## Project progress
 
@@ -31,14 +31,15 @@ The repository contains the approved application and test evidence through Phase
 | Phase 8 - Accessibility and Section 508 testing | Approved and published | axe-core automation, Lighthouse, WAVE, keyboard and focus checks, NVDA evidence, documented findings, remediation, and retest results in the [accessibility evidence set](accessibility/ACCESSIBILITY_TEST_PLAN.md) |
 | Phase 9 - Agile test management and traceability | Approved and published | Jira/Confluence/Zephyr mapping, cycles, executions, defect lifecycle, traceability, and sprint test summary |
 | Phase 10 - Performance testing | Approved and published | Loopback-only Locust workload passed at 10 users with 749 authenticated reads, 17 ms p95, 25.45 req/s, and 0.0000% errors |
+| Phase 11 - UAT planning and simulated client session | Approved and published | Six passing business scenarios, 20 passing focused checks, 114 passing project tests, one clarified misunderstanding, one deferred enhancement, and no confirmed UAT defect |
 
 ## Agile Test Management
 
 Phase 9 connects the local product backlog to execution evidence with a complete workflow: story and acceptance criteria -> test case -> automated check -> test cycle and execution -> defect when applicable -> retest -> final status.
 
 - The [Agile working model and tool mapping](docs/AGILE_TEST_MANAGEMENT.md) explains how local artifacts correspond to Jira stories and bugs, Confluence pages, and Zephyr Scale cases, cycles, and executions without requiring a hosted product.
-- [TEST_CASES.csv](test-management/TEST_CASES.csv) contains 49 Zephyr-style cases: 48 approved and one future release case intentionally left Draft.
-- [TEST_CYCLES.csv](test-management/TEST_CYCLES.csv) records completed functional, regression, API, database, accessibility, management, and performance cycles plus the explicitly planned UAT cycle.
+- [TEST_CASES.csv](test-management/TEST_CASES.csv) contains 55 Zephyr-style cases: 54 approved and one future release case intentionally left Draft.
+- [TEST_CYCLES.csv](test-management/TEST_CYCLES.csv) records completed functional, regression, API, database, accessibility, management, performance, and simulated UAT cycles.
 - [TEST_EXECUTIONS.csv](test-management/TEST_EXECUTIONS.csv) preserves every Phase 3 attempt and selected trace links from later automated cycles.
 - The [defect log](DEFECT_LOG.md) and [triage procedure](agile/DEFECT_TRIAGE.md) use `New -> Triaged -> Assigned -> In Progress -> Ready for Retest -> Retested -> Closed`.
 - The [traceability matrix](TRACEABILITY_MATRIX.md) and [machine-readable register](test-management/REQUIREMENTS_TRACEABILITY.csv) show a full path for every story. DEF-P3-001 is the worked failed-execution, correction, retest, and closure example.
@@ -189,3 +190,13 @@ Run the approved baseline from the repository root:
 The recorded 30-second run reached 10 concurrent users and completed 749 authenticated reads at 25.45 requests per second, with a combined p95 response time of 17 ms and a 0.0000% request error rate. All 102 project tests also pass in verified headless Brave. See the [performance test plan](performance/PERFORMANCE_TEST_PLAN.md), [evaluated results](performance/PERFORMANCE_RESULTS.md), and [formatted register](test-management/PHASE_10_PERFORMANCE_REGISTER.xlsx).
 
 The portfolio run is a load test at a defined user level. Stress testing searches beyond expected load for a breaking point, soak testing holds traffic for an extended period, and spike testing applies a sudden traffic jump; those three test types remain out of scope. The local observations are not production-capacity or service-level claims.
+
+## User acceptance testing
+
+Phase 11 models a professional UAT workflow without claiming real client experience. A disclosed single-person role-play used an operations-coordinator persona, business-goal scenario prompts, synthetic identities, observation before clarification, issue classification, and a separate Brave replay for technical corroboration.
+
+All six scenarios passed. The session recorded one requirement misunderstanding about the administrator's intentionally read-only team view and one enhancement request for due dates and priority fields. Neither observation is a product defect or failed test, and the enhancement remains deferred for product prioritization.
+
+The focused UAT and management verification passed 20 tests, including two Brave business-workflow replays. The complete project regression passed all 114 tests.
+
+See the [UAT plan](uat/UAT_PLAN.md), [scenario cards](uat/UAT_SCENARIOS.md), [session notes](uat/UAT_SESSION_NOTES.md), [issue and defect log](uat/UAT_DEFECT_LOG.md), [summary](uat/UAT_SUMMARY.md), and [sign-off template](uat/UAT_SIGNOFF_TEMPLATE.md).

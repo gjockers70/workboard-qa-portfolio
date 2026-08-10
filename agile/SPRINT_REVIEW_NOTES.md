@@ -20,4 +20,4 @@
 
 ## Release-readiness decision at this checkpoint
 
-The completed regression cycle supports continuing to Phase 10 because all six selected regression checks passed and no Critical or Major defect remains open. This is a continue-testing decision, not the final release recommendation. Performance, simulated UAT, pipeline gates, and final reporting remain planned for later phases.
+The completed regression cycle supported continuing to Phase 10 because all six selected regression checks passed and no Critical or Major defect remained open. At that checkpoint, performance and simulated UAT were still planned; both now have completed later-cycle records. Pipeline gates and final reporting remain planned, so this is still not the final release recommendation.
