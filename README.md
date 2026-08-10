@@ -15,7 +15,7 @@ The application includes:
 - FastAPI backend
 - SQLite persistence through SQLAlchemy
 
-The repository currently contains the approved application and test evidence through Phase 9.
+The repository contains the approved application and test evidence through Phase 10.
 
 ## Project progress
 
@@ -30,14 +30,15 @@ The repository currently contains the approved application and test evidence thr
 | Phase 7 - SQL and database testing | Approved and published | Isolated SQLite fixtures, reusable SQL inspection, schema and constraint checks, persistence and row-count validation, API-to-database comparisons, and 16 passing database tests |
 | Phase 8 - Accessibility and Section 508 testing | Approved and published | axe-core automation, Lighthouse, WAVE, keyboard and focus checks, NVDA evidence, documented findings, remediation, and retest results in the [accessibility evidence set](accessibility/ACCESSIBILITY_TEST_PLAN.md) |
 | Phase 9 - Agile test management and traceability | Approved and published | Jira/Confluence/Zephyr mapping, cycles, executions, defect lifecycle, traceability, and sprint test summary |
+| Phase 10 - Performance testing | Approved and published | Loopback-only Locust workload passed at 10 users with 749 authenticated reads, 17 ms p95, 25.45 req/s, and 0.0000% errors |
 
 ## Agile Test Management
 
 Phase 9 connects the local product backlog to execution evidence with a complete workflow: story and acceptance criteria -> test case -> automated check -> test cycle and execution -> defect when applicable -> retest -> final status.
 
 - The [Agile working model and tool mapping](docs/AGILE_TEST_MANAGEMENT.md) explains how local artifacts correspond to Jira stories and bugs, Confluence pages, and Zephyr Scale cases, cycles, and executions without requiring a hosted product.
-- [TEST_CASES.csv](test-management/TEST_CASES.csv) contains 49 Zephyr-style cases: 47 approved and two future release cases intentionally left Draft.
-- [TEST_CYCLES.csv](test-management/TEST_CYCLES.csv) records completed functional, regression, API, database, and accessibility cycles plus explicitly planned future cycles.
+- [TEST_CASES.csv](test-management/TEST_CASES.csv) contains 49 Zephyr-style cases: 48 approved and one future release case intentionally left Draft.
+- [TEST_CYCLES.csv](test-management/TEST_CYCLES.csv) records completed functional, regression, API, database, accessibility, management, and performance cycles plus the explicitly planned UAT cycle.
 - [TEST_EXECUTIONS.csv](test-management/TEST_EXECUTIONS.csv) preserves every Phase 3 attempt and selected trace links from later automated cycles.
 - The [defect log](DEFECT_LOG.md) and [triage procedure](agile/DEFECT_TRIAGE.md) use `New -> Triaged -> Assigned -> In Progress -> Ready for Retest -> Retested -> Closed`.
 - The [traceability matrix](TRACEABILITY_MATRIX.md) and [machine-readable register](test-management/REQUIREMENTS_TRACEABILITY.csv) show a full path for every story. DEF-P3-001 is the worked failed-execution, correction, retest, and closure example.
@@ -174,3 +175,17 @@ Remove-Item Env:CHROME_PATH
 ```
 
 Phase 8 has 10 passing dedicated tests and the complete project regression has 74 passing tests. Lighthouse scored 100, WAVE retests reported 0 errors, 0 contrast errors, and 0 alerts, and NVDA captured success and error announcements. See the [test plan](accessibility/ACCESSIBILITY_TEST_PLAN.md), [findings](accessibility/FINDINGS.md), and [remediation register](accessibility/REMEDIATION_RETEST.md). These results describe the tested local scope and are not a certification or legal-compliance claim.
+
+## Performance testing
+
+Phase 10 uses Locust for a bounded, loopback-only load test of authenticated profile and task reads. The runner starts the API against a disposable SQLite database, creates unique synthetic members, refuses non-loopback targets, and exits nonzero if the measured gate fails.
+
+Run the approved baseline from the repository root:
+
+```powershell
+.venv\Scripts\python.exe scripts\run_performance_baseline.py
+```
+
+The recorded 30-second run reached 10 concurrent users and completed 749 authenticated reads at 25.45 requests per second, with a combined p95 response time of 17 ms and a 0.0000% request error rate. All 102 project tests also pass in verified headless Brave. See the [performance test plan](performance/PERFORMANCE_TEST_PLAN.md), [evaluated results](performance/PERFORMANCE_RESULTS.md), and [formatted register](test-management/PHASE_10_PERFORMANCE_REGISTER.xlsx).
+
+The portfolio run is a load test at a defined user level. Stress testing searches beyond expected load for a breaking point, soak testing holds traffic for an extended period, and spike testing applies a sudden traffic jump; those three test types remain out of scope. The local observations are not production-capacity or service-level claims.

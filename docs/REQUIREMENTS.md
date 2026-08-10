@@ -66,9 +66,9 @@ These are verification targets for Section 508-oriented testing. They do not con
 | NFR-REL-001 | A page refresh retains a valid local session; an invalidated session produces a clear recovery path. | Should |
 | NFR-REMOTE-001 | After a short simulated connection interruption, the user receives a recoverable error and authorization remains unchanged after reconnection. | Should |
 | NFR-COMPAT-001 | Core workflows operate in the current stable Chrome browser at desktop and narrow responsive widths from 320 to 1280 pixels. | Should |
-| NFR-PERF-001 | During the later local baseline test, authenticated read endpoints target a 95th-percentile response time below 500 ms at 10 concurrent users with less than 1% request errors. | Could |
+| NFR-PERF-001 | During the bounded local baseline test, authenticated read endpoints target a 95th-percentile response time below 500 ms at 10 concurrent users with less than 1% request errors. | Could |
 
-The performance target is provisional until Phase 10 establishes a repeatable local baseline. It is not a production service-level commitment.
+Phase 10 evaluated this target with a repeatable local baseline. The recorded result applies only to that bounded environment and is not a production service-level commitment.
 
 ## Data rules
 
@@ -108,4 +108,3 @@ Changes to a Must requirement require the following before implementation:
 3. Re-estimate the backlog item and obtain approval.
 4. Update this baseline and its traceability links.
 5. Add or revise tests before release readiness is evaluated.
-

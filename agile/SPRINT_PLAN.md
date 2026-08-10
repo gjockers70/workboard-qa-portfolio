@@ -74,7 +74,7 @@ Exit target:
 
 ## Sprint 4 - UAT, performance, CI, and release decision
 
-Status: Planned
+Status: In Progress
 
 **Goal:** Complete stakeholder-oriented validation and produce a defensible release recommendation.
 

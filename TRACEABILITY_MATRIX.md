@@ -14,5 +14,6 @@ This readable matrix shows one end-to-end path for every product story. The CSV 
 | NFR-ACC-004 | US-008 | AC-US008-06 | TC-ACCESS-003 | `tests/ui/test_phase3_catalog.py::test_component_and_text_contrast` | CYCLE-PH3-20260810 | Pass after retest | DEF-P3-001 | Passed | Covered; defect closed |
 | NFR-REMOTE-001 | US-009 | AC-US009-03 | TC-REMOTE-002 | `tests/ui/test_phase3_catalog.py::test_connection_interruption_has_no_false_success` | CYCLE-PH3-20260810 | Pass | - | Not required | Covered |
 | BR-004 | US-010 | AC-US010-01 | TC-RELEASE-001 | `tests/test_management/test_agile_artifacts.py` | CYCLE-PH9-MANAGEMENT-20260810 | Pass | - | Not required | Covered at Phase 9 checkpoint |
+| NFR-PERF-001 | US-010 | AC-US010-05 | TC-RELEASE-005 | `performance/locustfile.py` | CYCLE-PH10-PERFORMANCE | Pass | - | Not required | Covered at Phase 10 checkpoint |
 
 The US-008 chain demonstrates the complete lifecycle: story -> acceptance criterion -> test case -> automated check -> failed execution -> DEF-P3-001 -> correction -> passing retest -> closed final status.

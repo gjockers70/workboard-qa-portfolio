@@ -1,0 +1,63 @@
+{
+  "result": "Pass",
+  "scope": "Bounded local baseline; not a production capacity statement.",
+  "environment": {
+    "operating_system": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.10",
+    "locust": "2.46.0",
+    "target": "http://127.0.0.1:8010"
+  },
+  "workload": {
+    "peak_concurrent_users": 10,
+    "spawn_rate_users_per_second": 2.0,
+    "run_time": 30,
+    "wait_time_seconds": "0.2-0.5"
+  },
+  "observations": {
+    "authenticated_read_requests": 749,
+    "failures": 0,
+    "error_rate_percent": 0.0,
+    "average_response_ms": 4.6,
+    "p95_response_ms": 17.0,
+    "throughput_requests_per_second": 25.45,
+    "setup_failures": 0,
+    "endpoints": [
+      {
+        "name": "GET /api/profile",
+        "requests": 224,
+        "failures": 0,
+        "average_ms": 4.31,
+        "p95_ms": 17,
+        "requests_per_second": 7.61
+      },
+      {
+        "name": "GET /api/tasks",
+        "requests": 395,
+        "failures": 0,
+        "average_ms": 4.71,
+        "p95_ms": 18,
+        "requests_per_second": 13.42
+      },
+      {
+        "name": "GET /api/tasks?search&state",
+        "requests": 130,
+        "failures": 0,
+        "average_ms": 4.77,
+        "p95_ms": 17,
+        "requests_per_second": 4.42
+      }
+    ]
+  },
+  "target": {
+    "p95_response_ms_below": 500.0,
+    "error_rate_percent_below": 1.0,
+    "concurrent_users": 10
+  },
+  "quality_gate": {
+    "read_samples_recorded": true,
+    "p95_below_target": true,
+    "error_rate_below_target": true,
+    "concurrency_reached": true,
+    "setup_succeeded": true
+  }
+}
