@@ -15,20 +15,33 @@ The application includes:
 - FastAPI backend
 - SQLite persistence through SQLAlchemy
 
-The repository currently contains the approved application and test evidence through Phase 8.
+The repository currently contains the approved application and test evidence through Phase 9.
 
 ## Project progress
 
 | Phase | Status | Evidence |
 |---|---|---|
-| Phase 1 — Demo application | Approved and published | React/FastAPI/SQLite application and verified member/admin workflows |
-| Phase 2 — Backlog, requirements, and acceptance criteria | Approved and published | [Requirements](docs/REQUIREMENTS.md), [Product backlog](agile/PRODUCT_BACKLOG.md), [User stories](agile/USER_STORIES.md), [Acceptance criteria](agile/ACCEPTANCE_CRITERIA.md), [Sprint plan](agile/SPRINT_PLAN.md) |
-| Phase 3 — Manual test plan and cases | Approved and published | 37 of 37 cases have a final Pass result; two findings were corrected and passed retest. See the [execution CSV](test-management/TEST_EXECUTIONS.csv) and [formatted execution register](test-management/PHASE_3_EXECUTION_REGISTER.xlsx) |
-| Phase 4 — Selenium framework | Approved and published | Browser fixtures, Page Objects, explicit waits, failure screenshots, HTML/JUnit reporting, and verified Brave and Edge smoke tests |
-| Phase 5 — Functional and regression automation | Approved and published | Eight Brave UI tests pass, including six tests selected by the regression marker |
-| Phase 6 — API and web-services testing | Approved and published | Reusable HTTP client, strict response contracts, authentication/authorization coverage, CRUD and validation tests, controlled 5xx handling, and 24 passing API tests |
-| Phase 7 — SQL and database testing | Approved and published | Isolated SQLite fixtures, reusable SQL inspection, schema and constraint checks, persistence and row-count validation, API-to-database comparisons, and 16 passing database tests |
-| Phase 8 — Accessibility and Section 508 testing | Approved and published | axe-core automation, Lighthouse, WAVE, keyboard and focus checks, NVDA evidence, documented findings, remediation, and retest results in the [accessibility evidence set](accessibility/ACCESSIBILITY_TEST_PLAN.md) |
+| Phase 1 - Demo application | Approved and published | React/FastAPI/SQLite application and verified member/admin workflows |
+| Phase 2 - Backlog, requirements, and acceptance criteria | Approved and published | [Requirements](docs/REQUIREMENTS.md), [Product backlog](agile/PRODUCT_BACKLOG.md), [User stories](agile/USER_STORIES.md), [Acceptance criteria](agile/ACCEPTANCE_CRITERIA.md), [Sprint plan](agile/SPRINT_PLAN.md) |
+| Phase 3 - Manual test plan and cases | Approved and published | 37 of 37 cases have a final Pass result; two findings were corrected and passed retest. See the [execution CSV](test-management/TEST_EXECUTIONS.csv) and [formatted execution register](test-management/PHASE_3_EXECUTION_REGISTER.xlsx) |
+| Phase 4 - Selenium framework | Approved and published | Browser fixtures, Page Objects, explicit waits, failure screenshots, HTML/JUnit reporting, and verified Brave and Edge smoke tests |
+| Phase 5 - Functional and regression automation | Approved and published | Eight Brave UI tests pass, including six tests selected by the regression marker |
+| Phase 6 - API and web-services testing | Approved and published | Reusable HTTP client, strict response contracts, authentication/authorization coverage, CRUD and validation tests, controlled 5xx handling, and 24 passing API tests |
+| Phase 7 - SQL and database testing | Approved and published | Isolated SQLite fixtures, reusable SQL inspection, schema and constraint checks, persistence and row-count validation, API-to-database comparisons, and 16 passing database tests |
+| Phase 8 - Accessibility and Section 508 testing | Approved and published | axe-core automation, Lighthouse, WAVE, keyboard and focus checks, NVDA evidence, documented findings, remediation, and retest results in the [accessibility evidence set](accessibility/ACCESSIBILITY_TEST_PLAN.md) |
+| Phase 9 - Agile test management and traceability | Approved and published | Jira/Confluence/Zephyr mapping, cycles, executions, defect lifecycle, traceability, and sprint test summary |
+
+## Agile Test Management
+
+Phase 9 connects the local product backlog to execution evidence with a complete workflow: story and acceptance criteria -> test case -> automated check -> test cycle and execution -> defect when applicable -> retest -> final status.
+
+- The [Agile working model and tool mapping](docs/AGILE_TEST_MANAGEMENT.md) explains how local artifacts correspond to Jira stories and bugs, Confluence pages, and Zephyr Scale cases, cycles, and executions without requiring a hosted product.
+- [TEST_CASES.csv](test-management/TEST_CASES.csv) contains 49 Zephyr-style cases: 47 approved and two future release cases intentionally left Draft.
+- [TEST_CYCLES.csv](test-management/TEST_CYCLES.csv) records completed functional, regression, API, database, and accessibility cycles plus explicitly planned future cycles.
+- [TEST_EXECUTIONS.csv](test-management/TEST_EXECUTIONS.csv) preserves every Phase 3 attempt and selected trace links from later automated cycles.
+- The [defect log](DEFECT_LOG.md) and [triage procedure](agile/DEFECT_TRIAGE.md) use `New -> Triaged -> Assigned -> In Progress -> Ready for Retest -> Retested -> Closed`.
+- The [traceability matrix](TRACEABILITY_MATRIX.md) and [machine-readable register](test-management/REQUIREMENTS_TRACEABILITY.csv) show a full path for every story. DEF-P3-001 is the worked failed-execution, correction, retest, and closure example.
+- The [sprint test summary](agile/SPRINT_TEST_SUMMARY.md) records that the six-test regression cycle, eight management-integrity tests, and complete 82-test regression passed; it does not claim the final release decision before later phases finish.
 
 ## Local setup
 

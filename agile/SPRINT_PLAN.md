@@ -1,8 +1,8 @@
-# Proposed Agile Sprint Plan
+# Agile Sprint Plan
 
 ## Status and intent
 
-This is a portfolio simulation plan. The application baseline was implemented during project Phase 1 before these sprint artifacts were created. The plan therefore describes how the remaining test workload will be organized; it does not retroactively claim completed sprint ceremonies or executions.
+This is a portfolio simulation. The application baseline was implemented before the sprint artifacts, so the plan does not imply employer, client, or production delivery. Completed sprint work is supported by repository execution evidence; future work remains explicitly planned.
 
 ## Cadence
 
@@ -12,7 +12,9 @@ This is a portfolio simulation plan. The application baseline was implemented du
 - Review checkpoint: working evidence and artifact review at the end of each sprint
 - Retrospective: one improvement to retain and one process change for the next sprint
 
-## Sprint 1 — Requirements and manual functional baseline
+## Sprint 1 - Requirements and manual functional baseline
+
+Status: Completed
 
 **Goal:** Establish approved requirements and execute the first traceable manual functional cycle.
 
@@ -29,7 +31,9 @@ Exit target:
 - Critical account, task, role, and authorization workflows have manual cases.
 - The first functional cycle has execution evidence and honest pass/fail status.
 
-## Sprint 2 — Automation and backend validation
+## Sprint 2 - Automation and backend validation
+
+Status: Completed
 
 **Goal:** Create maintainable Selenium, API, integration, and database coverage for critical risks.
 
@@ -48,7 +52,9 @@ Exit target:
 - Database state is compared with API or UI outcomes.
 - Flaky behavior is investigated rather than hidden with broad retries.
 
-## Sprint 3 — Accessibility, reliability, and remediation
+## Sprint 3 - Accessibility, reliability, and remediation
+
+Status: Completed
 
 **Goal:** Execute the controlled baselines, document findings, remediate selected failures, and prove them with regression tests.
 
@@ -66,7 +72,9 @@ Exit target:
 - At least one failed case follows the full defect lifecycle.
 - No claim of legal compliance is made from automated results alone.
 
-## Sprint 4 — UAT, performance, CI, and release decision
+## Sprint 4 - UAT, performance, CI, and release decision
+
+Status: Planned
 
 **Goal:** Complete stakeholder-oriented validation and produce a defensible release recommendation.
 
@@ -95,11 +103,10 @@ Exit target:
 
 ## Jira-style workflow
 
-`Backlog → Selected for Sprint → In Progress → Ready for Test → In Test → Ready for Retest → Done`
+`Backlog -> Selected for Sprint -> In Progress -> Ready for Test -> In Test -> Ready for Retest -> Done`
 
 Defects follow:
 
-`New → Triaged → Assigned → In Progress → Ready for Retest → Retested → Closed`
+`New -> Triaged -> Assigned -> In Progress -> Ready for Retest -> Retested -> Closed`
 
 A story reaches Done only when its acceptance criteria have execution evidence and any blocking defects are closed or explicitly accepted with a documented risk.
-
