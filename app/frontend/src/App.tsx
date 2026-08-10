@@ -5,6 +5,7 @@ type Session = { token: string; user: User }
 type TaskView = 'mine' | 'all'
 
 const seededAccessibilityDefects = import.meta.env.VITE_SEEDED_ACCESSIBILITY_DEFECTS === 'true'
+  || (import.meta.env.DEV && new URLSearchParams(window.location.search).get('accessibility-defects') === 'true')
 
 function readSession(): Session | null {
   const raw = localStorage.getItem('workboard-session')
@@ -165,11 +166,17 @@ export default function App() {
     setMessage('Signed out')
   }
 
-  const feedback = error
-    ? <div className="alert error" data-testid="feedback" role={seededAccessibilityDefects ? undefined : 'alert'}>{error}</div>
-    : message
-      ? <div className="alert success" data-testid="feedback" role={seededAccessibilityDefects ? undefined : 'status'}>{message}</div>
-      : null
+  const feedbackText = error || message
+  const feedback = (
+    <div
+      aria-atomic={seededAccessibilityDefects ? undefined : 'true'}
+      className={feedbackText ? `alert ${error ? 'error' : 'success'}` : 'feedback-region'}
+      data-testid="feedback"
+      role={seededAccessibilityDefects ? undefined : error ? 'alert' : 'status'}
+    >
+      {feedbackText}
+    </div>
+  )
 
   if (!session) {
     return (
@@ -180,9 +187,9 @@ export default function App() {
           <p>Manage a focused list of work from one place.</p>
           {feedback}
           <form onSubmit={authenticate}>
-            {registering && <label>Display name<input data-testid="display-name" value={displayName} onChange={(event) => setDisplayName(event.target.value)} minLength={2} required /></label>}
-            <label>Email<input data-testid="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>
-            <label>Password<input data-testid="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={8} required /></label>
+            {registering && <label htmlFor="auth-display-name">Display name<input id="auth-display-name" data-testid="display-name" value={displayName} onChange={(event) => setDisplayName(event.target.value)} minLength={2} required /></label>}
+            <label htmlFor="auth-email">Email<input id="auth-email" data-testid="email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} required /></label>
+            <label htmlFor="auth-password">Password<input id="auth-password" data-testid="password" type="password" value={password} onChange={(event) => setPassword(event.target.value)} minLength={8} required /></label>
             <button data-testid="auth-submit" disabled={busy}>{busy ? 'Please wait...' : registering ? 'Create account' : 'Sign in'}</button>
           </form>
           <button data-testid="toggle-auth-mode" className="link-button" onClick={() => setRegistering((value) => !value)}>
@@ -207,15 +214,15 @@ export default function App() {
             <h2>Create a task</h2>
             {feedback}
             <form onSubmit={addTask}>
-              <label>Title<input data-testid="task-title" value={title} onChange={(event) => setTitle(event.target.value)} maxLength={120} required /></label>
-              <label>Description<textarea data-testid="task-description" value={description} onChange={(event) => setDescription(event.target.value)} maxLength={1000} /></label>
+              <label htmlFor="task-title-input">Title<input id="task-title-input" data-testid="task-title" value={title} onChange={(event) => setTitle(event.target.value)} maxLength={120} required /></label>
+              <label htmlFor="task-description-input">Description<textarea id="task-description-input" data-testid="task-description" value={description} onChange={(event) => setDescription(event.target.value)} maxLength={1000} /></label>
               <button data-testid="create-task" disabled={busy}>Add task</button>
             </form>
           </section>
           <section className="card profile-card">
             <h2>Profile</h2>
             <form onSubmit={saveProfile}>
-              <label>Display name<input data-testid="profile-name" value={profileName} onChange={(event) => setProfileName(event.target.value)} minLength={2} required /></label>
+              <label htmlFor="profile-name-input">Display name<input id="profile-name-input" data-testid="profile-name" value={profileName} onChange={(event) => setProfileName(event.target.value)} minLength={2} required /></label>
               <button className="secondary" data-testid="save-profile" disabled={busy}>Save profile</button>
             </form>
           </section>
@@ -230,11 +237,11 @@ export default function App() {
           {taskView === 'mine' ? (
             <div className="toolbar">
               {seededAccessibilityDefects ? (
-                <div><span className="field-text">Search tasks</span><input className="seeded-low-contrast" data-testid="task-search" type="search" placeholder="Search" value={search} onChange={(event) => setSearch(event.target.value)} /></div>
+                <div><span className="field-text">Search tasks</span><input id="search-tasks-input" className="seeded-low-contrast" data-testid="task-search" type="search" placeholder="Search" value={search} onChange={(event) => setSearch(event.target.value)} /></div>
               ) : (
-                <label>Search tasks<input data-testid="task-search" type="search" value={search} onChange={(event) => setSearch(event.target.value)} /></label>
+                <label htmlFor="search-tasks-input">Search tasks<input id="search-tasks-input" data-testid="task-search" type="search" value={search} onChange={(event) => setSearch(event.target.value)} /></label>
               )}
-              <label>Status<select data-testid="task-filter" value={state} onChange={(event) => setState(event.target.value)}><option value="all">All</option><option value="active">Active</option><option value="completed">Completed</option></select></label>
+              <label htmlFor="status-filter">Status<select id="status-filter" data-testid="task-filter" value={state} onChange={(event) => setState(event.target.value)}><option value="all">All</option><option value="active">Active</option><option value="completed">Completed</option></select></label>
             </div>
           ) : <p className="view-note">Administrator oversight is read-only for tasks owned by other users.</p>}
           <div className="task-list" data-testid="task-list">

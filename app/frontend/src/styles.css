@@ -55,7 +55,7 @@ h1, h2, p { margin-top: 0; }
 .success { color: #176b3a; background: #dcf7e7; }
 .empty { padding: 3rem 1rem; text-align: center; color: #566176; }
 .seeded-low-contrast { color: #aeb8c8; }
-.seeded-focus-defect button:focus-visible, .seeded-focus-defect input:focus-visible, .seeded-focus-defect textarea:focus-visible, .seeded-focus-defect select:focus-visible { outline: none; }
+.seeded-focus-defect button:focus-visible, .seeded-focus-defect input:focus-visible, .seeded-focus-defect textarea:focus-visible, .seeded-focus-defect select:focus-visible { outline: none; box-shadow: none; }
 
 @media (max-width: 760px) {
   .app-shell > header { align-items: stretch; flex-direction: column; }

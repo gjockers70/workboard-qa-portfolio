@@ -15,7 +15,7 @@ The application includes:
 - FastAPI backend
 - SQLite persistence through SQLAlchemy
 
-The repository currently contains the approved application, project-management artifacts, manual test suite, and Selenium foundation through Phase 4.
+The repository currently contains the approved application and test evidence through Phase 8.
 
 ## Project progress
 
@@ -28,6 +28,7 @@ The repository currently contains the approved application, project-management a
 | Phase 5 — Functional and regression automation | Approved and published | Eight Brave UI tests pass, including six tests selected by the regression marker |
 | Phase 6 — API and web-services testing | Approved and published | Reusable HTTP client, strict response contracts, authentication/authorization coverage, CRUD and validation tests, controlled 5xx handling, and 24 passing API tests |
 | Phase 7 — SQL and database testing | Approved and published | Isolated SQLite fixtures, reusable SQL inspection, schema and constraint checks, persistence and row-count validation, API-to-database comparisons, and 16 passing database tests |
+| Phase 8 — Accessibility and Section 508 testing | Approved and published | axe-core automation, Lighthouse, WAVE, keyboard and focus checks, NVDA evidence, documented findings, remediation, and retest results in the [accessibility evidence set](accessibility/ACCESSIBILITY_TEST_PLAN.md) |
 
 ## Local setup
 
@@ -75,7 +76,7 @@ The normal application starts with corrected behavior. Later test cycles can del
 - `WORKBOARD_SEEDED_FUNCTIONAL_DEFECTS=true` for the backend baseline
 - `VITE_SEEDED_ACCESSIBILITY_DEFECTS=true` for the frontend baseline
 
-These switches are for local test execution only and remain disabled by default.
+During local frontend development, the accessibility baseline can also be opened with `?accessibility-defects=true`. Production builds ignore that query switch. These controls are for local test execution only and remain disabled by default.
 
 ## Selenium framework
 
@@ -138,3 +139,25 @@ Run the isolated database suite with:
 ```
 
 The suite validates schema columns, required values, unique email enforcement, foreign keys, cascading deletes, salted password storage, inserts, transformations, updates, deletes, owner-specific row counts, unchanged state after rejected authorization, and API results against independent SQL queries. The local Phase 7 run has 16 passing tests with deprecation warnings treated as failures.
+
+## Accessibility testing
+
+Install the frontend development dependencies before running the axe-core suite:
+
+```powershell
+cd app/frontend
+npm install
+cd ../..
+.venv\Scripts\python -m pytest tests/accessibility --browser brave -W error::DeprecationWarning
+```
+
+Run the reproducible Lighthouse accessibility audit with the local Brave binary:
+
+```powershell
+cd app/frontend
+$env:CHROME_PATH = "C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe"
+npm run audit:accessibility -- http://127.0.0.1:5173/
+Remove-Item Env:CHROME_PATH
+```
+
+Phase 8 has 10 passing dedicated tests and the complete project regression has 74 passing tests. Lighthouse scored 100, WAVE retests reported 0 errors, 0 contrast errors, and 0 alerts, and NVDA captured success and error announcements. See the [test plan](accessibility/ACCESSIBILITY_TEST_PLAN.md), [findings](accessibility/FINDINGS.md), and [remediation register](accessibility/REMEDIATION_RETEST.md). These results describe the tested local scope and are not a certification or legal-compliance claim.
