@@ -26,6 +26,7 @@ The repository currently contains the approved application, project-management a
 | Phase 3 — Manual test plan and cases | Execution approved locally | 37 of 37 cases have a final Pass result; two findings were corrected and passed retest. See the [execution CSV](test-management/TEST_EXECUTIONS.csv) and [formatted execution register](test-management/PHASE_3_EXECUTION_REGISTER.xlsx) |
 | Phase 4 — Selenium framework | Approved and published | Browser fixtures, Page Objects, explicit waits, failure screenshots, HTML/JUnit reporting, and verified Brave and Edge smoke tests |
 | Phase 5 — Functional and regression automation | Approved and published | Eight Brave UI tests pass, including six tests selected by the regression marker |
+| Phase 6 — API and web-services testing | Approved locally; commit and upload pending | Reusable HTTP client, strict response contracts, authentication/authorization coverage, CRUD and validation tests, controlled 5xx handling, and 24 passing API tests |
 
 ## Local setup
 
@@ -108,3 +109,19 @@ Run the complete browser suite with:
 The framework defaults to verified headless Brave execution using a disposable test profile. It writes a self-contained HTML report, JUnit XML, and failure screenshots under the ignored `reports/` directory. Edge is also verified locally and can be selected with `--browser edge`. Google Chrome can be selected with `--browser chrome`, but compatibility is not claimed until that browser completes the suite successfully.
 
 The current local Phase 5 execution has six passing regression tests and eight passing UI tests overall. The sign-out navigation failure discovered during implementation was corrected and passed focused and full-suite retesting.
+
+## API testing
+
+Phase 6 exercises the REST service directly without using the browser. The reusable client keeps endpoint construction and bearer-token handling separate from test intent, while tests retain access to raw responses for negative status and payload assertions.
+
+Run the API suite with a synthetic local administrator configured through temporary environment variables:
+
+```powershell
+$env:WORKBOARD_TEST_USER_EMAIL = "synthetic.admin@example.test"
+$env:WORKBOARD_TEST_USER_PASSWORD = "local-synthetic-password"
+.venv\Scripts\python -m pytest tests/api
+Remove-Item Env:WORKBOARD_TEST_USER_EMAIL
+Remove-Item Env:WORKBOARD_TEST_USER_PASSWORD
+```
+
+The local Phase 6 run has 24 passing tests. Timing checks are single-request development observations, not load-test results or production-capacity claims. Database-state assertions remain assigned to Phase 7.

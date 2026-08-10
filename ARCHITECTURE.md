@@ -6,7 +6,7 @@ Phase 4 created the reusable Selenium foundation and one authenticated smoke tes
 
 ## Phase 5 automation boundary
 
-Phase 5 adds browser-functional and regression coverage for registration, sign-in rejection, sign-out, task creation and mutation, validation, combined search and filtering, profile persistence, and administrator read-only oversight. Direct API assertions, SQL validation, accessibility evaluation, and performance measurement remain assigned to later phases.
+Phase 5 adds browser-functional and regression coverage for registration, sign-in rejection, sign-out, task creation and mutation, validation, combined search and filtering, profile persistence, and administrator read-only oversight. SQL validation, specialized accessibility evaluation, and load or concurrency measurement remain assigned to later phases.
 
 Each member scenario registers a unique synthetic identity through the interface. Tests own uniquely named tasks and delete them when safe. The administrator scenario reads credentials from environment variables because privileged credentials must not be stored in source control.
 
@@ -82,6 +82,24 @@ Member scenarios create unique synthetic accounts through the browser. The admin
 - `regression` covers stable workflows rerun after changes.
 
 The markers overlap intentionally because one scenario can be both functional and regression-critical. Marker selection changes execution scope; it does not duplicate the test implementation.
+
+## Phase 6 API boundary
+
+`framework/clients/workboard_api.py` owns REST paths, bearer-token headers, request construction, timeouts, and normalized service-error handling. It returns raw HTTP responses so negative tests can assert exact status codes and error bodies without exceptions hiding the contract under test.
+
+`framework/clients/contracts.py` defines independent strict Pydantic response models. Rejecting unexpected response fields helps detect silent contract drift instead of coupling tests to the backend's internal schema classes.
+
+`tests/api/` covers:
+
+- health and authenticated-read timing observations;
+- registration, login, email normalization, duplicates, and neutral credential errors;
+- missing and invalid bearer tokens;
+- profile reads, updates, and invalid values;
+- task POST, GET, PATCH, DELETE, search, filtering, boundaries, missing fields, and incorrect types;
+- member isolation, administrator access, and owner identity in team results;
+- controlled client behavior for a simulated 503 response.
+
+The timing assertions observe one request at a time against the local service. They are not concurrency, percentile, throughput, or production-capacity measurements. SQL row validation remains a Phase 7 responsibility.
 
 ## Reporting and failure evidence
 

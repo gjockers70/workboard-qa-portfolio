@@ -9,14 +9,14 @@ class SyntheticUser:
     password: str
 
 
-def synthetic_user(label: str = "member") -> SyntheticUser:
+def synthetic_user(label: str = "member", phase: str = "phase5") -> SyntheticUser:
     token = uuid4().hex[:10]
     return SyntheticUser(
-        display_name=f"Phase 5 {label.title()} {token[:4]}",
-        email=f"phase5.{label}.{token}@example.test",
+        display_name=f"{phase.title()} {label.title()} {token[:4]}",
+        email=f"{phase.lower()}.{label}.{token}@example.test",
         password=f"Synthetic-{token}!",
     )
 
 
-def synthetic_task_title(label: str) -> str:
-    return f"Phase 5 {label} {uuid4().hex[:8]}"
+def synthetic_task_title(label: str, phase: str = "phase5") -> str:
+    return f"{phase.title()} {label} {uuid4().hex[:8]}"
