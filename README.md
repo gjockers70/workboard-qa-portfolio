@@ -15,7 +15,7 @@ The application includes:
 - FastAPI backend
 - SQLite persistence through SQLAlchemy
 
-The repository contains the approved and published application and test evidence through Phase 13 plus the approved Phase 14 report awaiting hosted validation.
+The repository contains the approved and published application and test evidence through Phase 14.
 
 ## Project progress
 
@@ -34,7 +34,7 @@ The repository contains the approved and published application and test evidence
 | Phase 11 - UAT planning and simulated client session | Approved and published | Six passing business scenarios, 20 passing focused checks, 114 passing project tests, one clarified misunderstanding, one deferred enhancement, and no confirmed UAT defect |
 | Phase 12 - Remediation and retesting | Approved and published | Four closed defects independently confirmed, six managed regression cases passed, 12 focused checks passed, all 121 project tests passed, and no UAT observation was misclassified as a corrected defect |
 | Phase 13 - CI/CD and quality gates | Approved and published | GitHub Actions build and test workflow, manual-only performance trigger, six blocking test groups, executable gate evaluation, 115 passing local gate checks, 132 passing project tests, and a [passing hosted quality-gate run](https://github.com/gjockers70/workboard-qa-portfolio/actions/runs/31446401173) |
-| Phase 14 - Test summary reporting | Approved; hosted validation pending | Technical and stakeholder summaries, 125 of 125 final cycle checks passed, four of four defects closed, documented residual risks, and Release recommended for the tested portfolio scope |
+| Phase 14 - Test summary reporting | Approved and published | Technical and stakeholder summaries, 125 of 125 final cycle checks passed, four of four defects closed, documented residual risks, Release recommended for the tested portfolio scope, and a [passing hosted quality-gate run](https://github.com/gjockers70/workboard-qa-portfolio/actions/runs/31448368982) |
 
 ## Agile Test Management
 

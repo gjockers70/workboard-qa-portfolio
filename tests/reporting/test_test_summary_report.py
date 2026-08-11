@@ -124,4 +124,4 @@ def test_phase14_traceability_and_status_records_resolve() -> None:
         and row["Final Status"] == "Release recommended"
         for row in traceability
     )
-    assert "Approved; hosted validation pending" in text
+    assert "Approved and published" in text

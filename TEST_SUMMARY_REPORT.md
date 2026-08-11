@@ -9,7 +9,7 @@
 | Product baseline | Corrected React, FastAPI, and SQLite WorkBoard application |
 | Environments | Windows 11 with Brave; GitHub-hosted Ubuntu with headless Chrome |
 | Test data | Synthetic identities and isolated local or runner databases |
-| Report status | Approved; hosted validation pending |
+| Report status | Approved and published |
 
 ## 2. Executive summary
 
@@ -155,7 +155,7 @@ This was a small local baseline using SQLite. It is not a production-capacity or
 
 ### CI/CD
 
-The corrected GitHub Actions workflow passed the frontend build, unit/artifact, API, database, smoke, critical-regression, accessibility, gate-evaluation, cleanup, and evidence-upload steps. The [published hosted run](https://github.com/gjockers70/workboard-qa-portfolio/actions/runs/31446675379) completed successfully, and generated evidence was retained as a workflow artifact.
+The corrected GitHub Actions workflow passed the frontend build, unit/artifact, API, database, smoke, critical-regression, accessibility, gate-evaluation, cleanup, and evidence-upload steps. The [Phase 14 hosted run](https://github.com/gjockers70/workboard-qa-portfolio/actions/runs/31448368982) included the final report-consistency checks, completed successfully, and retained generated evidence as a workflow artifact.
 
 The separate performance workflow remains manual-only so the bounded load test does not run on every commit.
 
