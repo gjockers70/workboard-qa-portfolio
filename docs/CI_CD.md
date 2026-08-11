@@ -69,6 +69,8 @@ After the six JUnit files exist under `reports/ci`, evaluate the decision with:
 5. Apply an approved correction, rerun the focused test and impact-based regression, then rerun the complete gate.
 6. Do not rerun repeatedly merely to obtain a passing result; an unexplained intermittent result remains a reliability risk.
 
-## Validation boundary at the checkpoint
+## Validation result
 
-The workflow structure, evaluator, and every equivalent gate command are validated locally before Phase 13 approval. The first hosted run cannot exist until the approved workflow is committed and pushed. After approval, the hosted run must be monitored to completion and any runner-specific failure corrected before Phase 13 is treated as published successfully.
+The workflow structure, evaluator, and every equivalent gate command passed locally before Phase 13 approval. After the approved push, the first attempt exposed a job-level context error before any job started. The database path was moved to the runner execution step, protected by a workflow-contract assertion, and pushed as a focused correction.
+
+The corrected [hosted quality-gate run](https://github.com/gjockers70/workboard-qa-portfolio/actions/runs/31446401173) passed the build, all six test groups, the blocking evaluator, cleanup, and artifact upload. This is the hosted evidence supporting Phase 13 publication.

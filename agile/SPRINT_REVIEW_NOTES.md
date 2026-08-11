@@ -20,7 +20,7 @@
 
 ## Release-readiness decision at this checkpoint
 
-The completed regression cycle supported continuing to Phase 10 because all six selected regression checks passed and no Critical or Major defect remained open. At that checkpoint, performance and simulated UAT were still planned; both now have completed later-cycle records. Pipeline gates and final reporting remain planned, so this is still not the final release recommendation.
+The completed regression cycle supported continuing to Phase 10 because all six selected regression checks passed and no Critical or Major defect remained open. Performance, simulated UAT, and pipeline gates now have completed later-cycle records. Final reporting remains planned, so this is still not the final release recommendation.
 
 ## Sprint 4 — Performance, simulated UAT, and retest assurance
 
@@ -34,4 +34,5 @@ The completed regression cycle supported continuing to Phase 10 because all six 
 - Added one fast validation workflow and one manual-only performance workflow.
 - Separated build, unit/artifact, API, database, smoke, regression, and accessibility evidence so a failed stage is diagnosable.
 - Applied release blockers for any failure or skip, regression below 100%, an open Critical defect, or missing acceptance-criteria coverage.
+- Recorded a successful hosted run covering the build, all six test groups, gate evaluation, cleanup, and artifact retention.
 - Improvement carried forward: a locally validated workflow is not described as hosted evidence until the approved push produces a completed remote run.

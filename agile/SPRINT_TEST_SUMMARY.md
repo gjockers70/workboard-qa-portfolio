@@ -13,7 +13,7 @@
 | CYCLE-PH10-PERFORMANCE | Bounded local performance baseline | 1 Pass; 749 authenticated reads, 17 ms p95, 0.0000% errors; complete project regression 102 Pass | No performance blocker in tested local scope |
 | CYCLE-PH11-UAT | Simulated business acceptance | 6 Pass; 0 Fail; focused verification 20 Pass; complete project regression 114 Pass; 1 requirement misunderstanding; 1 deferred enhancement; 0 confirmed UAT defects | Accepted for the disclosed simulated scope |
 | CYCLE-PH12-REMEDIATION-20260810 | Closed-defect confirmation and impact-based regression | 4 of 4 managed defect confirmations Pass; 6 of 6 managed regression cases Pass; 12 focused automated checks Pass; complete project regression 121 Pass | No remediation or regression blocker in tested scope |
-| CYCLE-PH13-CI-20260810 | Local CI-equivalent quality gates | 6 of 6 gate groups Pass; 115 gate checks Pass; complete project regression 132 Pass; hosted execution begins after approved push | Workflow checkpoint may proceed to hosted validation after approval |
+| CYCLE-PH13-CI-20260810 | Local and hosted CI quality gates | 6 of 6 local gate groups Pass; 115 local gate checks Pass; complete project regression 132 Pass; corrected hosted run Pass | Phase 13 approved and published |
 
 ## Defects
 
@@ -32,8 +32,8 @@
 - Accessibility evidence is not a certification or legal-compliance claim.
 - The Phase 10 observations apply only to the recorded local workload and are not production-capacity or service-level claims.
 - The final release recommendation remains outside this checkpoint.
-- Hosted runner behavior cannot be confirmed until the approved workflow is pushed.
+- Hosted evidence applies to GitHub's `ubuntu-latest` runner image used by the recorded run.
 
 ## Recommendation
 
-The Phase 13 local gate cycle passes without a failure or skip. The approved push must produce a successful hosted run before the workflow is described as published successfully. Final release readiness remains Not Evaluated until Phase 14 reporting is complete.
+The Phase 13 local and hosted gate cycles pass without a failure or skip. Phase 13 is approved and published. Final release readiness remains Not Evaluated until Phase 14 reporting is complete.
