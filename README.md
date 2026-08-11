@@ -15,7 +15,7 @@ The application includes:
 - FastAPI backend
 - SQLite persistence through SQLAlchemy
 
-The repository contains the approved and published application and test evidence through Phase 13.
+The repository contains the approved and published application and test evidence through Phase 13 plus the approved Phase 14 report awaiting hosted validation.
 
 ## Project progress
 
@@ -34,18 +34,19 @@ The repository contains the approved and published application and test evidence
 | Phase 11 - UAT planning and simulated client session | Approved and published | Six passing business scenarios, 20 passing focused checks, 114 passing project tests, one clarified misunderstanding, one deferred enhancement, and no confirmed UAT defect |
 | Phase 12 - Remediation and retesting | Approved and published | Four closed defects independently confirmed, six managed regression cases passed, 12 focused checks passed, all 121 project tests passed, and no UAT observation was misclassified as a corrected defect |
 | Phase 13 - CI/CD and quality gates | Approved and published | GitHub Actions build and test workflow, manual-only performance trigger, six blocking test groups, executable gate evaluation, 115 passing local gate checks, 132 passing project tests, and a [passing hosted quality-gate run](https://github.com/gjockers70/workboard-qa-portfolio/actions/runs/31446401173) |
+| Phase 14 - Test summary reporting | Approved; hosted validation pending | Technical and stakeholder summaries, 125 of 125 final cycle checks passed, four of four defects closed, documented residual risks, and Release recommended for the tested portfolio scope |
 
 ## Agile Test Management
 
 Phase 9 connects the local product backlog to execution evidence with a complete workflow: story and acceptance criteria -> test case -> automated check -> test cycle and execution -> defect when applicable -> retest -> final status.
 
 - The [Agile working model and tool mapping](docs/AGILE_TEST_MANAGEMENT.md) explains how local artifacts correspond to Jira stories and bugs, Confluence pages, and Zephyr Scale cases, cycles, and executions without requiring a hosted product.
-- [TEST_CASES.csv](test-management/TEST_CASES.csv) contains 55 Zephyr-style cases: 54 approved and one future release case intentionally left Draft.
+- [TEST_CASES.csv](test-management/TEST_CASES.csv) contains 55 approved Zephyr-style cases, including the final release-decision case.
 - [TEST_CYCLES.csv](test-management/TEST_CYCLES.csv) records completed functional, regression, API, database, accessibility, management, performance, and simulated UAT cycles.
 - [TEST_EXECUTIONS.csv](test-management/TEST_EXECUTIONS.csv) preserves every Phase 3 attempt and selected trace links from later automated cycles.
 - The [defect log](DEFECT_LOG.md) and [triage procedure](agile/DEFECT_TRIAGE.md) use `New -> Triaged -> Assigned -> In Progress -> Ready for Retest -> Retested -> Closed`.
 - The [traceability matrix](TRACEABILITY_MATRIX.md) and [machine-readable register](test-management/REQUIREMENTS_TRACEABILITY.csv) show a full path for every story. DEF-P3-001 is the worked failed-execution, correction, retest, and closure example.
-- The [sprint test summary](agile/SPRINT_TEST_SUMMARY.md) records that the six-test regression cycle, eight management-integrity tests, and complete 82-test regression passed; it does not claim the final release decision before later phases finish.
+- The [sprint test summary](agile/SPRINT_TEST_SUMMARY.md) preserves results from every completed cycle, while the [final test summary](TEST_SUMMARY_REPORT.md) reconciles those records into the Phase 14 release recommendation.
 
 ## Local setup
 
@@ -220,3 +221,9 @@ Phase 13 adds a GitHub Actions workflow for pull requests, pushes to `main`, and
 The blocking policy requires every selected test to execute and pass, a 100% critical-regression pass rate, no open Critical defect, and complete acceptance-criteria coverage. The repository has no deployment job, so the workflow produces a release-quality decision without claiming production deployment.
 
 The bounded Phase 10 performance baseline is isolated in a manual-only workflow and does not run on every commit. See the [CI/CD design and quality-gate policy](docs/CI_CD.md) and [Phase 13 validation record](ci/PHASE_13_VALIDATION.md).
+
+## Test summary reporting
+
+Phase 14 reconciles the managed inventory, final cycle counts, retained execution history, defects, accessibility evidence, UAT classifications, performance observations, remediation results, traceability, and hosted quality gates. The [final test summary](TEST_SUMMARY_REPORT.md) contains both the technical decision record and a short stakeholder-facing summary.
+
+The recommendation is to Release the corrected WorkBoard baseline for the tested portfolio scope. The report explicitly preserves the limits of that decision: it is not production deployment approval, accessibility certification, production-capacity evidence, or real-client sign-off.

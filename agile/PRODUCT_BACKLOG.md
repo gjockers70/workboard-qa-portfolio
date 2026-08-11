@@ -20,7 +20,7 @@
 | 7 | US-008 | Story | Complete core workflows with keyboard and assistive technology | Must | 8 | Done | Sprint 3 |
 | 8 | US-005 | Story | View and update a profile display name | Should | 3 | Done | Sprint 1 |
 | 9 | US-009 | Story | Recover predictably after refresh, interruption, or reconnection | Should | 5 | Done | Sprint 3 |
-| 10 | US-010 | Story | Evaluate release readiness from traceable quality evidence | Must | 8 | In test | Sprint 4 |
+| 10 | US-010 | Story | Evaluate release readiness from traceable quality evidence | Must | 8 | Done | Sprint 4 |
 
 ## Quality-engineering enablers
 

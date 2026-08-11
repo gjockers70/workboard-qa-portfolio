@@ -77,6 +77,7 @@ jobs:
           tests/performance/test_performance_records.py
           tests/performance/test_performance_support.py
           tests/remediation
+          tests/reporting
           tests/test_management
           tests/uat/test_uat_artifacts.py
           --junitxml=reports/ci/unit-and-artifact.xml

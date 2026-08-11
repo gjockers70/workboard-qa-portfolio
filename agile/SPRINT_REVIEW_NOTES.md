@@ -20,7 +20,7 @@
 
 ## Release-readiness decision at this checkpoint
 
-The completed regression cycle supported continuing to Phase 10 because all six selected regression checks passed and no Critical or Major defect remained open. Performance, simulated UAT, and pipeline gates now have completed later-cycle records. Final reporting remains planned, so this is still not the final release recommendation.
+The completed regression cycle supported continuing to Phase 10 because all six selected regression checks passed and no Critical or Major defect remained open. Performance, simulated UAT, pipeline gates, and final reporting now have completed later-cycle records. Phase 14 recommends release for the tested portfolio scope.
 
 ## Sprint 4 — Performance, simulated UAT, and retest assurance
 
@@ -36,3 +36,10 @@ The completed regression cycle supported continuing to Phase 10 because all six 
 - Applied release blockers for any failure or skip, regression below 100%, an open Critical defect, or missing acceptance-criteria coverage.
 - Recorded a successful hosted run covering the build, all six test groups, gate evaluation, cleanup, and artifact retention.
 - Improvement carried forward: a locally validated workflow is not described as hosted evidence until the approved push produces a completed remote run.
+
+## Sprint 4 - Final test summary and release decision
+
+- Reconciled 55 approved managed cases, 125 final checks across 11 completed cycles, and 77 execution rows without overwriting the two historical failures.
+- Confirmed all four recorded defects are closed, all 56 acceptance criteria have managed case coverage, and the complete Phase 14 regression passed.
+- Separated accepted limitations from release blockers and produced both technical and stakeholder-facing summaries.
+- Recommendation: Release the corrected WorkBoard baseline for the tested portfolio scope; production deployment, certification, capacity, and real-client claims remain outside the decision.

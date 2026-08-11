@@ -40,6 +40,7 @@ def test_fast_workflow_contains_every_required_gate_and_artifact_upload() -> Non
         "tests/ci",
         "tests/api",
         "tests/database",
+        "tests/reporting",
         "tests/accessibility",
         "test_registered_user_can_sign_in",
         "test_search_and_status_filter_apply_together",
