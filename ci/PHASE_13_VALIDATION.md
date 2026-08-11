@@ -37,3 +37,5 @@ The first draft placed the API stage before application startup. A local dry run
 ## Publication boundary
 
 This document verifies the locally approved checkpoint. Approval was recorded on 2026-08-10. The hosted workflow begins with the approved push and must complete successfully before Phase 13 is described as published successfully.
+
+The first hosted validation attempt ended before job creation because `runner.temp` is not available while GitHub validates job-level environment expressions. The database path now uses the runner-provided `RUNNER_TEMP` variable inside an executed setup step, and a workflow-contract assertion prevents the unsupported expression from returning.

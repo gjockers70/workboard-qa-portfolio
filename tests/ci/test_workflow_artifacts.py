@@ -46,11 +46,13 @@ def test_fast_workflow_contains_every_required_gate_and_artifact_upload() -> Non
         "scripts/evaluate_quality_gates.py",
         "actions/upload-artifact@v7",
         'echo "WORKBOARD_ADMIN_PASSWORD=$test_password" >> "$GITHUB_ENV"',
+        'echo "WORKBOARD_DATABASE_URL=sqlite:///$RUNNER_TEMP/workboard-ci.db" >> "$GITHUB_ENV"',
         "if: always()",
     ):
         assert required in text
     assert text.index("- name: Start local application") < text.index("- name: Run API tests")
     assert "ci-local-synthetic-password" not in text
+    assert "runner.temp" not in text
     assert "scripts/run_performance_baseline.py" not in text
 
 

@@ -25,7 +25,6 @@ jobs:
       WORKBOARD_BROWSER: chrome
       WORKBOARD_HEADLESS: "true"
       WORKBOARD_TEST_USER_EMAIL: ci.admin@example.test
-      WORKBOARD_DATABASE_URL: sqlite:///${{ runner.temp }}/workboard-ci.db
 
     steps:
       - name: Check out repository
@@ -66,6 +65,7 @@ jobs:
           echo "::add-mask::$test_password"
           echo "WORKBOARD_TEST_USER_PASSWORD=$test_password" >> "$GITHUB_ENV"
           echo "WORKBOARD_ADMIN_PASSWORD=$test_password" >> "$GITHUB_ENV"
+          echo "WORKBOARD_DATABASE_URL=sqlite:///$RUNNER_TEMP/workboard-ci.db" >> "$GITHUB_ENV"
 
       - name: Build frontend
         run: npm run build --prefix app/frontend
