@@ -5,16 +5,16 @@
 | Field | Value |
 |---|---|
 | Project | WorkBoard QA Portfolio |
-| Plan status | Approved; Phase 3 execution complete locally |
+| Plan status | Approved baseline; execution and reporting completed through Phase 14 |
 | Product baseline | Local React, FastAPI, and SQLite application |
 | Test approach | Risk-based, traceable, incremental |
 | Cost target | $0 using local and free tools |
 
-Approval of this plan authorizes test design and execution against the stated scope. It does not authorize publication or production deployment.
+Phase 3 approval authorized test design and execution against this scope. Later checkpoints separately authorized publication of their evidence. No checkpoint authorized production deployment.
 
 ## 2. Objective
 
-Demonstrate whether WorkBoard satisfies its approved requirements by combining manual functional testing with later UI, API, database, accessibility, integration, performance, and CI validation. The plan emphasizes evidence, reproducibility, controlled defect handling, and honest release reporting.
+Demonstrate whether WorkBoard satisfies its approved requirements by combining manual functional testing with UI, API, database, accessibility, integration, performance, and CI validation. The plan emphasizes evidence, reproducibility, controlled defect handling, and honest release reporting.
 
 ## 3. Scope
 
@@ -55,6 +55,9 @@ Demonstrate whether WorkBoard satisfies its approved requirements by combining m
 - `agile/ACCEPTANCE_CRITERIA.md`
 - `agile/SPRINT_PLAN.md`
 - `test-management/TEST_CASES.csv`
+- `TEST_STRATEGY.md`
+- `docs/REMOTE_ACCESS_TESTING.md`
+- `docs/WEB_SERVICES_TESTING.md`
 
 ## 5. Test items
 
@@ -83,31 +86,31 @@ The regression set grows from stable functional cases, every corrected defect, a
 
 ### UI automation
 
-Selenium with pytest will automate stable, valuable browser workflows. Page Objects will separate locators and reusable actions from test intent. Explicit waits, stable selectors, synthetic data, cleanup, and failure screenshots will reduce flakiness.
+Selenium with pytest automates stable, valuable browser workflows. Page Objects separate locators and reusable actions from test intent. Explicit waits, stable selectors, synthetic data, cleanup, and failure screenshots reduce flakiness.
 
 ### API and integration testing
 
-Reusable API clients will validate status codes, schemas, authentication, authorization, validation, error handling, and response-time baselines. Integration cases will compare API or UI outcomes with database state.
+Reusable API clients validate status codes, schemas, authentication, authorization, validation, error handling, and response-time baselines. Integration cases compare API or UI outcomes with database state.
 
 ### Database testing
 
-SQL-based checks will confirm inserts, updates, deletes, uniqueness, null handling, ownership, row counts, and unchanged state after rejected requests. Database tests will use isolated synthetic records.
+SQL-based checks confirm inserts, updates, deletes, uniqueness, null handling, ownership, row counts, and unchanged state after rejected requests. Database tests use isolated synthetic records.
 
 ### Accessibility testing
 
-Automated axe and Lighthouse checks will be combined with WAVE review, keyboard-only execution, contrast measurement, and NVDA testing. Automated results alone cannot establish accessibility or legal compliance.
+Automated axe and Lighthouse checks are combined with WAVE review, keyboard-only execution, contrast measurement, and NVDA testing. Automated results alone cannot establish accessibility or legal compliance.
 
 ### Usability testing
 
-Manual exploratory sessions will examine labels, navigation, error clarity, destructive-action confirmation, task discoverability, and recovery behavior. Subjective observations will be separated from requirement failures.
+Manual exploratory sessions examine labels, navigation, error clarity, destructive-action confirmation, task discoverability, and recovery behavior. Subjective observations are separated from requirement failures.
 
 ### Performance baseline
 
-A small Locust test will measure response time, throughput, concurrency, and errors against the local API only. It will not run on every commit and will not be represented as production capacity.
+A small Locust test measures response time, throughput, concurrency, and errors against the local API only. It does not run on every commit and is not represented as production capacity.
 
 ### UAT
 
-A simulated business user will attempt goal-oriented scenarios without being coached through failures. Results will distinguish defects, requirement misunderstandings, and enhancements before retest and sign-off status are recorded.
+A simulated business user attempts goal-oriented scenarios without being coached through failures. Results distinguish defects, requirement misunderstandings, and enhancements before retest and sign-off status are recorded.
 
 ## 7. Manual versus automated coverage
 
@@ -132,7 +135,7 @@ Manual testing remains necessary where human perception, assistive-technology be
 | Local accessibility-defect baseline | Accessibility finding exercise | Frontend accessibility switch enabled deliberately |
 | GitHub Actions | Repeatable CI execution | Headless Chrome, ephemeral test data, retained reports |
 
-Initial browser scope is the current stable Chrome release on Windows at desktop and responsive widths. Broader cross-browser coverage is deferred until the Chrome suite is stable.
+Executed browser scope uses Brave as the primary local browser, headless Chrome for hosted quality-gate selections, and limited local Edge smoke evidence at desktop and responsive widths. A maintained cross-browser and device matrix remains deferred.
 
 ## 9. Roles and responsibilities
 
@@ -144,7 +147,7 @@ Initial browser scope is the current stable Chrome release on Windows at desktop
 | UAT participant | Attempts business scenarios, explains expectations, and accepts or rejects outcomes |
 | Release stakeholder | Reviews test summary, exceptions, residual risks, and release recommendation |
 
-One person may perform multiple roles in this portfolio simulation, but artifacts will identify the role being represented. Simulated participation will not be presented as real client experience.
+One person may perform multiple roles in this portfolio simulation, but artifacts identify the role being represented. Simulated participation is not presented as real client experience.
 
 ## 10. Test data
 
@@ -198,7 +201,7 @@ Pause execution when the application cannot start, the database cannot be isolat
 
 ## 15. Reporting
 
-Execution records will include case ID, cycle, environment, result, tester role, date, evidence, and linked defect. Reports will provide:
+Execution records include case ID, cycle, environment, result, tester role, date, evidence, and linked defect. Reports provide:
 
 - Planned, executed, passed, failed, blocked, and not-run counts
 - Results by test type and requirement priority
@@ -223,7 +226,7 @@ Execution records will include case ID, cycle, environment, result, tester role,
 
 ## 17. Assumptions and dependencies
 
-- Python, Node.js, Chrome, and Git remain available locally.
+- Python, Node.js, Brave, and Git remain available locally; hosted runners provide Chrome for pipeline selections.
 - SQLite is the initial database; PostgreSQL portability remains optional.
 - The application continues to expose stable test selectors for critical controls.
 - GitHub public-repository Actions can be used at no cost within applicable limits.
@@ -241,6 +244,7 @@ Execution records will include case ID, cycle, environment, result, tester role,
 | Phase 9 | Agile management and traceability | Cycles, executions, defects, and matrix |
 | Phases 10–12 | Performance, UAT, remediation | Baseline, session results, retest evidence |
 | Phases 13–14 | CI, gates, and reporting | Retained artifacts and release recommendation |
+| Phase 15 | Documentation and repository cleanup | Completion documents, screenshots, integrity checks, and public-repository presentation |
 
 ## 19. Level-of-effort estimates
 
@@ -258,8 +262,8 @@ These are planning ranges, not guarantees. They assume one contributor learning 
 | CI and quality gates | 10–18 hours | Workflows, artifacts, headless browser, gate logic |
 | Reporting and final documentation | 10–16 hours | Results, limitations, runbook, portfolio cleanup |
 
-LOE is built from scope size, test-data needs, environment setup, automation complexity, evidence requirements, uncertainty, and review/rework allowance. Estimates will be revised using actual execution experience rather than treated as fixed commitments.
+LOE is built from scope size, test-data needs, environment setup, automation complexity, evidence requirements, uncertainty, and review/rework allowance. These planning ranges were intended to be revised from execution evidence rather than treated as fixed commitments.
 
 ## 20. Approval checkpoint
 
-Phase 3 approval confirmed that the scope, risk priorities, entry/exit criteria, manual test catalog, and proposed estimates were suitable. The completed local execution is recorded separately in `test-management/TEST_EXECUTIONS.csv` and `test-management/PHASE_3_EXECUTION_REGISTER.xlsx`; publication remains subject to the next checkpoint approval.
+Phase 3 approval confirmed that the scope, risk priorities, entry/exit criteria, manual test catalog, and proposed estimates were suitable. The completed execution is recorded separately in `test-management/TEST_EXECUTIONS.csv` and `test-management/PHASE_3_EXECUTION_REGISTER.xlsx`. Later phase approvals and the final scoped recommendation are recorded in `README.md` and `TEST_SUMMARY_REPORT.md`.

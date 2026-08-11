@@ -38,6 +38,7 @@ def test_fast_workflow_contains_every_required_gate_and_artifact_upload() -> Non
     text = FAST_WORKFLOW.read_text(encoding="utf-8")
     for required in (
         "tests/ci",
+        "tests/documentation",
         "tests/api",
         "tests/database",
         "tests/reporting",

@@ -33,7 +33,7 @@ Phase 12 did not change application behavior. It consolidated the approved corre
 - Results describe the recorded local Windows and Brave environment with synthetic data.
 - The accessibility confirmations do not constitute certification or a legal-compliance claim.
 - The Phase 10 performance result remains bounded to its recorded loopback-only workload.
-- Pipeline quality gates and the final release recommendation remain assigned to later phases.
+- At the Phase 12 checkpoint, pipeline gates and the final release recommendation remained assigned to later phases; their completed outcomes are recorded in the [Phase 13 pipeline validation](../ci/PHASE_13_VALIDATION.md) and [final test summary](../TEST_SUMMARY_REPORT.md).
 
 ## Checkpoint status
 

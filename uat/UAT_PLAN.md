@@ -31,7 +31,7 @@ Excluded:
 - production data, hosting, email delivery, password recovery, and multi-factor authentication;
 - destructive testing, production-scale load, and security penetration testing;
 - accessibility certification or legal-compliance claims;
-- final release recommendation, which remains assigned to a later phase.
+- final release recommendation, which was outside the Phase 11 session and is recorded separately in the [final test summary](../TEST_SUMMARY_REPORT.md).
 
 ## Entry criteria
 

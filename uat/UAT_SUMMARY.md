@@ -32,4 +32,4 @@ UAT-OBS-001 was resolved as a requirement misunderstanding because team oversigh
 - Deferred enhancement: UAT-ENH-001 linked to ENH-002
 - Final release decision: Not evaluated in Phase 11
 
-The final release recommendation remains dependent on later planned remediation, continuous-integration, reporting, and documentation phases.
+At the Phase 11 checkpoint, the final release recommendation still depended on remediation, continuous-integration, and reporting work. Those later decisions are recorded in the [Phase 12 retest summary](../remediation/PHASE_12_RETEST_SUMMARY.md), [Phase 13 pipeline validation](../ci/PHASE_13_VALIDATION.md), and [final test summary](../TEST_SUMMARY_REPORT.md).

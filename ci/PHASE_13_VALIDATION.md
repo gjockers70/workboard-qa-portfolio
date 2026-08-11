@@ -40,4 +40,4 @@ Approval was recorded on 2026-08-10. The corrected [hosted quality-gate run](htt
 
 The first hosted validation attempt ended before job creation because `runner.temp` is not available while GitHub validates job-level environment expressions. The database path now uses the runner-provided `RUNNER_TEMP` variable inside an executed setup step, and a workflow-contract assertion prevents the unsupported expression from returning.
 
-Phase 13 is approved and published. Final release reporting remains assigned to Phase 14.
+Phase 13 is approved and published. At that checkpoint, final release reporting remained assigned to Phase 14; the completed recommendation is recorded in the [final test summary](../TEST_SUMMARY_REPORT.md).

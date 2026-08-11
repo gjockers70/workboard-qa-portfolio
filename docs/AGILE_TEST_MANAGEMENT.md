@@ -6,7 +6,7 @@ The repository uses a lightweight one-week sprint simulation. Product stories an
 
 The workflow is:
 
-`Backlog â†’ Selected for Sprint â†’ In Progress â†’ Ready for Test â†’ In Test â†’ Ready for Retest â†’ Done`
+`Backlog -> Selected for Sprint -> In Progress -> Ready for Test -> In Test -> Ready for Retest -> Done`
 
 The release gate uses the regression cycle as a decision point: a Critical regression or authorization failure stops further release testing; an all-pass regression result permits the next planned cycle.
 
@@ -24,6 +24,21 @@ No hosted or paid product is required to review this project. The local files us
 | `DEFECT_LOG.md` | Bug issue with severity, priority, owner, and workflow status | Triage decision log | Defect link from failed execution |
 | `test-management/REQUIREMENTS_TRACEABILITY.csv` | Issue links between story, test, and bug | Requirements traceability page | Requirement, case, cycle, execution, and defect links |
 | `agile/SPRINT_TEST_SUMMARY.md` | Sprint review attachment or release comment | Sprint test-summary page | Cycle summary and final status |
+
+## How one story moves through the tools
+
+The local records can be operated in Jira, Confluence, and Zephyr Scale without changing the quality workflow:
+
+1. Create the epic and story in Jira, including priority, estimate, sprint, owner, requirements, and acceptance criteria.
+2. Baseline the readable requirement and test approach on a versioned Confluence page, then link that page from the story.
+3. Create or import the linked cases in Zephyr Scale and review their preconditions, synthetic data, steps, expected results, labels, and automation references.
+4. Add the approved cases to a Zephyr test cycle associated with the Jira sprint or release version.
+5. Execute the cycle and record each attempt, environment, actual result, evidence, and tester role without overwriting earlier attempts.
+6. When a failure reproduces, create a Jira Bug, link the story and failed Zephyr execution, assign severity and priority, and move it through the agreed defect workflow.
+7. After correction, execute focused retest and impact-based regression in Zephyr, link both results to the Bug, and close the Bug only when the evidence passes.
+8. Update the Confluence sprint-testing page with coverage, results, defects, exceptions, risks, and the release recommendation; link the summary back to the Jira sprint.
+
+The local example below follows that same lifecycle. It models the fields and decisions but does not claim hosted-product administration.
 
 ## Example records
 

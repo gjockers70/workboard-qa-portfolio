@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`TEST_CASES.csv` is the source register for manual cases. Each row represents one versioned test case and can later map to a Zephyr-style case record. Cases remain `Draft` until reviewed and remain `Not Executed` until a test cycle records an actual result.
+`TEST_CASES.csv` is the source register for manual cases. Each row represents one versioned test case and maps to a Zephyr-style case record. A new case remains `Draft` until reviewed, and case approval remains separate from the result of any execution attempt. The current registered cases are approved; historical attempts are retained in the execution register.
 
 ## Before execution
 
@@ -53,8 +53,8 @@ A failed case becomes a defect candidate only after reproduction. Record the fai
 | Automation Candidate | Future automation disposition |
 | Status | Draft or approved case state, not execution result |
 
-Execution status, evidence, linked defects, and tester/date fields belong in separate execution records. The initial Phase 3 cycle is recorded in `TEST_EXECUTIONS.csv` and `PHASE_3_EXECUTION_REGISTER.xlsx`; Phase 9 will extend this structure with broader cycle and traceability management.
+Execution status, evidence, linked defects, and tester/date fields belong in separate execution records. The initial Phase 3 cycle is recorded in `TEST_EXECUTIONS.csv` and `PHASE_3_EXECUTION_REGISTER.xlsx`. Phase 9 extended the same structure with broader cycles and end-to-end traceability, as documented in the [Agile test-management guide](../docs/AGILE_TEST_MANAGEMENT.md).
 
 ## Phase 3 coverage boundary
 
-The initial manual catalog contains 37 cases covering 22 requirements and 44 acceptance criteria. Twelve criteria are intentionally deferred to specialized API, database, CI, performance, and release-reporting phases. This is planned incremental coverage, not a claim that the deferred criteria have been tested.
+At the Phase 3 checkpoint, the manual catalog contained 37 cases covering 22 requirements and 44 acceptance criteria. Twelve criteria were intentionally deferred to specialized API, database, CI, performance, and release-reporting phases. Those later phases completed the planned managed coverage; the [readable matrix](../TRACEABILITY_MATRIX.md) and [machine-readable register](REQUIREMENTS_TRACEABILITY.csv) record the final links.

@@ -32,7 +32,7 @@
 - Results describe the local test environment and synthetic data only.
 - Accessibility evidence is not a certification or legal-compliance claim.
 - The Phase 10 observations apply only to the recorded local workload and are not production-capacity or service-level claims.
-- Phase 15 documentation and repository cleanup remains project work but is not a product-quality blocker for the tested baseline.
+- At the Phase 14 checkpoint, Phase 15 documentation and repository cleanup remained project work but was not a product-quality blocker for the tested baseline.
 - Hosted evidence applies to GitHub's `ubuntu-latest` runner image used by the recorded run.
 
 ## Recommendation

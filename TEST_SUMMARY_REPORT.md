@@ -13,13 +13,13 @@
 
 ## 2. Executive summary
 
-WorkBoard satisfied every defined release exit criterion for the tested portfolio scope. All 125 final checks across 11 completed test cycles passed. The current complete repository regression passed 140 of 140 tests with no failures, errors, or skips. All four confirmed defects are closed, every fixed defect passed independent confirmation and impact-based regression, all 56 acceptance criteria have managed test-case coverage, and the hosted quality-gate workflow passed.
+WorkBoard satisfied every defined release exit criterion for the tested portfolio scope. All 125 final checks across 11 completed test cycles passed. The Phase 14 complete repository regression passed 140 of 140 tests with no failures, errors, or skips. All four confirmed defects are closed, every fixed defect passed independent confirmation and impact-based regression, all 56 acceptance criteria have managed test-case coverage, and the hosted quality-gate workflow passed.
 
 The simulated UAT exercise accepted the approved business scope with one deferred enhancement. The bounded local performance baseline met its defined targets. Accessibility automation, keyboard checks, Lighthouse, WAVE, and NVDA evidence found no unresolved confirmed finding in the corrected scope.
 
 **Release recommendation: RELEASE the corrected WorkBoard baseline for the tested portfolio scope.**
 
-This recommendation does not represent production deployment approval, legal accessibility certification, production-capacity validation, or real-client acceptance. Phase 15 documentation and repository cleanup remains project work, but it is not a product-quality blocker for the validated baseline.
+This recommendation does not represent production deployment approval, legal accessibility certification, production-capacity validation, or real-client acceptance. At the Phase 14 reporting checkpoint, Phase 15 documentation and repository cleanup remained project work, but it was not a product-quality blocker for the validated baseline.
 
 ## 3. Decision basis
 
@@ -170,7 +170,7 @@ The separate performance workflow remains manual-only so the bounded load test d
 | Accessibility coverage is sampled and environment-specific | Accepted with explicit non-certification boundary |
 | UAT used a disclosed simulation | Accepted for learning evidence; no real-client experience or sign-off is claimed |
 | Controlled defect modes remain in local source | Accepted because they are disabled by default and separately tested |
-| Phase 15 documentation and repository cleanup is not complete | Project-completion task; not a blocker for the tested application baseline |
+| At the Phase 14 checkpoint, Phase 15 documentation and repository cleanup was not complete | Project-completion task; not a blocker for the tested application baseline |
 
 ## 12. Technical release recommendation
 

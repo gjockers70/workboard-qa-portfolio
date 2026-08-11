@@ -74,6 +74,7 @@ jobs:
         run: >-
           python -m pytest
           tests/ci
+          tests/documentation
           tests/performance/test_performance_records.py
           tests/performance/test_performance_support.py
           tests/remediation

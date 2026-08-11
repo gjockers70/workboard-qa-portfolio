@@ -1,0 +1,1 @@
+"""Documentation integrity checks."""
