@@ -35,7 +35,7 @@
 | 17 | QE-007 | Task | Run controlled defect, remediation, and regression cycles | Must | 8 | Done | Sprint 3 |
 | 18 | QE-008 | Task | Facilitate and document a simulated UAT session | Should | 8 | Done | Sprint 4 |
 | 19 | QE-009 | Task | Establish a safe local performance baseline | Could | 5 | Done | Sprint 4 |
-| 20 | QE-010 | Task | Add CI workflows, reports, artifacts, and quality gates | Must | 13 | Planned | Sprint 4 |
+| 20 | QE-010 | Task | Add CI workflows, reports, artifacts, and quality gates | Must | 13 | Done | Sprint 4 |
 
 ## Backlog decision rules
 

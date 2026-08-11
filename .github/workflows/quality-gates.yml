@@ -1,0 +1,176 @@
+name: Quality Gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-gates-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality-gates:
+    name: Build, test, and evaluate
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      PYTHONUNBUFFERED: "1"
+      WORKBOARD_BASE_URL: http://127.0.0.1:5173
+      WORKBOARD_BROWSER: chrome
+      WORKBOARD_HEADLESS: "true"
+      WORKBOARD_TEST_USER_EMAIL: ci.admin@example.test
+      WORKBOARD_DATABASE_URL: sqlite:///${{ runner.temp }}/workboard-ci.db
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements-test.txt
+            app/backend/requirements.txt
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: app/frontend/package-lock.json
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r app/backend/requirements.txt -r requirements-test.txt
+
+      - name: Install frontend dependencies
+        run: npm ci --prefix app/frontend
+
+      - name: Prepare report directory
+        run: mkdir -p reports/ci reports/screenshots
+
+      - name: Create ephemeral test credential
+        run: |
+          test_password="$(python -c 'import secrets; print(secrets.token_urlsafe(24))')"
+          echo "::add-mask::$test_password"
+          echo "WORKBOARD_TEST_USER_PASSWORD=$test_password" >> "$GITHUB_ENV"
+          echo "WORKBOARD_ADMIN_PASSWORD=$test_password" >> "$GITHUB_ENV"
+
+      - name: Build frontend
+        run: npm run build --prefix app/frontend
+
+      - name: Run unit and artifact checks
+        run: >-
+          python -m pytest
+          tests/ci
+          tests/performance/test_performance_records.py
+          tests/performance/test_performance_support.py
+          tests/remediation
+          tests/test_management
+          tests/uat/test_uat_artifacts.py
+          --junitxml=reports/ci/unit-and-artifact.xml
+          --html=reports/ci/unit-and-artifact.html
+          --self-contained-html
+
+      - name: Start local application
+        run: |
+          pushd app/backend
+          python -m app.manage create-admin --email "$WORKBOARD_TEST_USER_EMAIL" --display-name "CI Administrator"
+          nohup python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 > ../../reports/ci/backend.log 2>&1 &
+          echo $! > ../../reports/ci/backend.pid
+          popd
+          pushd app/frontend
+          nohup npm run dev -- --host 127.0.0.1 --port 5173 --strictPort > ../../reports/ci/frontend.log 2>&1 &
+          echo $! > ../../reports/ci/frontend.pid
+          popd
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8000/health > /dev/null && curl --fail --silent http://127.0.0.1:5173/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Local application did not become ready." >&2
+          exit 1
+
+      - name: Run API tests
+        run: >-
+          python -m pytest tests/api
+          --junitxml=reports/ci/api.xml
+          --html=reports/ci/api.html
+          --self-contained-html
+
+      - name: Run database tests
+        run: >-
+          python -m pytest tests/database -W error::DeprecationWarning
+          --junitxml=reports/ci/database.xml
+          --html=reports/ci/database.html
+          --self-contained-html
+
+      - name: Run smoke tests
+        run: >-
+          python -m pytest
+          tests/ui/test_framework_smoke.py::test_registered_user_can_sign_in
+          tests/ui/test_functional_regression.py::test_member_can_register_and_sign_out
+          tests/ui/test_functional_regression.py::test_member_task_lifecycle
+          --browser chrome
+          --junitxml=reports/ci/smoke.xml
+          --html=reports/ci/smoke.html
+          --self-contained-html
+
+      - name: Run critical regression tests
+        run: >-
+          python -m pytest
+          tests/ui/test_functional_regression.py::test_incorrect_password_does_not_create_session
+          tests/ui/test_functional_regression.py::test_member_task_lifecycle
+          tests/ui/test_functional_regression.py::test_blank_task_title_is_rejected
+          tests/ui/test_functional_regression.py::test_search_and_status_filter_apply_together
+          tests/ui/test_functional_regression.py::test_profile_name_persists_across_sessions
+          tests/ui/test_functional_regression.py::test_administrator_team_view_is_read_only_for_member_task
+          --browser chrome
+          --junitxml=reports/ci/regression.xml
+          --html=reports/ci/regression.html
+          --self-contained-html
+
+      - name: Run accessibility automation
+        run: >-
+          python -m pytest tests/accessibility
+          --browser chrome
+          --junitxml=reports/ci/accessibility.xml
+          --html=reports/ci/accessibility.html
+          --self-contained-html
+
+      - name: Evaluate blocking quality gates
+        run: >-
+          python scripts/evaluate_quality_gates.py
+          --results-dir reports/ci
+          --output reports/ci/quality-gates.json
+          --minimum-regression-pass-rate 100
+
+      - name: Stop local application
+        if: always()
+        run: |
+          test ! -f reports/ci/frontend.pid || kill "$(cat reports/ci/frontend.pid)" || true
+          test ! -f reports/ci/backend.pid || kill "$(cat reports/ci/backend.pid)" || true
+
+      - name: Save test reports and diagnostics
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: quality-gate-evidence-${{ github.run_number }}
+          path: |
+            reports/ci
+            reports/screenshots
+            reports/chromedriver.log
+          if-no-files-found: warn
+          retention-days: 14

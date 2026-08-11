@@ -15,7 +15,7 @@ The application includes:
 - FastAPI backend
 - SQLite persistence through SQLAlchemy
 
-The repository contains the approved application and test evidence through Phase 12.
+The repository contains the approved application and test evidence through Phase 13. Hosted validation begins when the approved workflow is pushed.
 
 ## Project progress
 
@@ -33,6 +33,7 @@ The repository contains the approved application and test evidence through Phase
 | Phase 10 - Performance testing | Approved and published | Loopback-only Locust workload passed at 10 users with 749 authenticated reads, 17 ms p95, 25.45 req/s, and 0.0000% errors |
 | Phase 11 - UAT planning and simulated client session | Approved and published | Six passing business scenarios, 20 passing focused checks, 114 passing project tests, one clarified misunderstanding, one deferred enhancement, and no confirmed UAT defect |
 | Phase 12 - Remediation and retesting | Approved and published | Four closed defects independently confirmed, six managed regression cases passed, 12 focused checks passed, all 121 project tests passed, and no UAT observation was misclassified as a corrected defect |
+| Phase 13 - CI/CD and quality gates | Approved; hosted validation pending | GitHub Actions build and test workflow, manual-only performance trigger, six blocking test groups, executable gate evaluation, 115 passing gate checks, and 132 passing project tests |
 
 ## Agile Test Management
 
@@ -211,3 +212,11 @@ No application change was required in this phase. All four defects had already b
 The complete project suite passed all 121 tests with no skips, and the frontend production build passed.
 
 See the [remediation plan](remediation/REMEDIATION_PLAN.md), [impact analysis](remediation/REGRESSION_IMPACT_ANALYSIS.md), [defect retest matrix](remediation/DEFECT_RETEST_MATRIX.csv), [execution guide](remediation/RETEST_EXECUTION_GUIDE.md), and [Phase 12 summary](remediation/PHASE_12_RETEST_SUMMARY.md).
+
+## CI/CD
+
+Phase 13 adds a GitHub Actions workflow for pull requests, pushes to `main`, and manual dispatch. The job builds the frontend; runs unit and artifact checks, API tests, database tests, headless Selenium smoke and regression tests, and accessibility automation; evaluates blocking defect and traceability rules; and retains JUnit, HTML, screenshot, service-log, and browser-driver evidence for 14 days.
+
+The blocking policy requires every selected test to execute and pass, a 100% critical-regression pass rate, no open Critical defect, and complete acceptance-criteria coverage. The repository has no deployment job, so the workflow produces a release-quality decision without claiming production deployment.
+
+The bounded Phase 10 performance baseline is isolated in a manual-only workflow and does not run on every commit. See the [CI/CD design and quality-gate policy](docs/CI_CD.md) and [Phase 13 validation record](ci/PHASE_13_VALIDATION.md).
